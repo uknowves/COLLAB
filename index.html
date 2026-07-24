@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLLAB — Платформа бренда · STATE OF MIND</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Arsenal:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --panel:#f5f5f6;
+  --panel-2:#efeff1;
+  --line:#e6e6e8;
+  --ink:#0d0d0f;
+  --ink-soft:#26262b;
+  --muted:#76767d;
+  --muted-2:#9a9aa1;
+  --orange:#ff5e1a;
+  --orange-2:#ff8a3d;
+  --peach:#ffd9bf;
+  --peach-soft:#fff2e9;
+  --font-display:'Oswald','Arial Narrow',sans-serif;
+  --font-body:'Arsenal','Segoe UI',system-ui,sans-serif;
+  --font-serif:'Arsenal','Segoe UI',system-ui,sans-serif;
+  --maxw:1180px;
+  --r:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:18px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--orange);color:#fff}
+
+/* ---------- typography helpers ---------- */
+.display{font-family:var(--font-display);font-weight:600;text-transform:uppercase;line-height:0.98;letter-spacing:-0.01em}
+.eyebrow{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.22em;font-weight:500;font-size:13px;color:var(--muted)}
+.serif{font-family:var(--font-serif)}
+.grad-text{background:linear-gradient(100deg,var(--orange) 0%,var(--orange-2) 55%,#ffb27a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+section{position:relative}
+.sec-pad{padding:120px 0}
+.sec-head{max-width:820px;margin-bottom:60px}
+.sec-num{font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.16em;color:var(--orange);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.sec-num::before{content:"";width:34px;height:2px;background:var(--orange);display:inline-block}
+.sec-title{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:clamp(34px,5vw,60px);line-height:0.98;letter-spacing:-0.01em}
+.sec-sub{margin-top:22px;font-size:19px;color:var(--muted);max-width:680px}
+.sec-sub b{color:var(--ink-soft);font-weight:700}
+
+/* ---------- background decor ---------- */
+.mesh{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-40px) scale(1.12)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,50px) scale(1.08)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,60px) scale(1.15)}}
+
+/* ---------- top progress nav ---------- */
+.dotnav{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:14px}
+.dotnav a{display:flex;align-items:center;gap:10px;justify-content:flex-end;text-decoration:none;color:var(--muted);cursor:pointer}
+.dotnav .lbl{font-family:var(--font-display);text-transform:uppercase;font-size:11px;letter-spacing:.12em;opacity:0;transform:translateX(6px);transition:.25s;white-space:nowrap;color:var(--ink)}
+.dotnav .dt{width:11px;height:11px;border-radius:50%;border:2px solid var(--muted-2);background:transparent;transition:.25s;flex:none}
+.dotnav a:hover .lbl{opacity:1;transform:translateX(0)}
+.dotnav a:hover .dt{border-color:var(--orange)}
+.dotnav a.active .dt{background:var(--orange);border-color:var(--orange);transform:scale(1.25)}
+.dotnav a.active .lbl{opacity:1;transform:translateX(0);color:var(--orange)}
+@media(max-width:1000px){.dotnav{display:none}}
+
+/* ---------- header bar ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:55;display:flex;justify-content:space-between;align-items:center;padding:22px 34px;mix-blend-mode:normal;transition:.3s}
+.topbar .brand{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:19px;line-height:.9}
+.topbar .brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
+.topbar .tag{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted);border:1px solid var(--line);padding:8px 16px;border-radius:100px;background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+.topbar.scrolled{background:rgba(255,255,255,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px 34px}
+
+/* ========== HERO ========== */
+.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero .blob.b1{width:620px;height:620px;background:radial-gradient(circle,#ff6a24,#ff9a4d);top:-160px;right:-120px;animation:float1 16s ease-in-out infinite;opacity:.42}
+.hero .blob.b2{width:520px;height:520px;background:radial-gradient(circle,#ffd0a8,#ffe9d6);bottom:-180px;left:-120px;animation:float2 20s ease-in-out infinite;opacity:.6}
+.hero .blob.b3{width:360px;height:360px;background:radial-gradient(circle,#ffb98a,#fff);top:38%;left:44%;animation:float3 22s ease-in-out infinite;opacity:.4}
+.hero-inner{position:relative;z-index:2;width:100%}
+.hero .kick{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 18px 9px 12px;box-shadow:0 6px 24px rgba(20,20,25,.06);margin-bottom:34px}
+.hero .kick .pill{background:var(--ink);color:#fff;font-family:var(--font-display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+.hero .kick .txt{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--muted)}
+.hero h1{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:clamp(44px,7.6vw,104px);line-height:0.93;letter-spacing:-0.015em;max-width:14ch}
+.hero h1 .l2{display:block}
+.hero-sub{margin-top:34px;max-width:560px;font-size:20px;color:var(--ink-soft)}
+.hero-sub .muted{color:var(--muted)}
+.hero-meta{margin-top:44px;display:flex;gap:40px;flex-wrap:wrap;align-items:center}
+.hero-meta .item .k{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--muted);margin-bottom:4px}
+.hero-meta .item .v{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:20px}
+.scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scrollcue .line{width:1px;height:40px;background:linear-gradient(var(--orange),transparent);animation:pulseLine 1.8s ease-in-out infinite}
+@keyframes pulseLine{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ========== METHOD / PYRAMID ========== */
+.method{background:var(--bg)}
+.pyr-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.pyramid{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pyr-row{display:flex;gap:14px;justify-content:center;width:100%}
+.lvl{
+  border-radius:14px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+  font-family:var(--font-display);text-transform:uppercase;font-weight:600;letter-spacing:.05em;font-size:15px;
+  padding:16px 20px;text-align:center;cursor:pointer;transition:.26s cubic-bezier(.2,.7,.3,1);
+  display:flex;align-items:center;justify-content:center;gap:12px;position:relative;user-select:none;
+}
+.lvl .lnum{font-size:11px;color:var(--muted);border:1.2px solid var(--muted-2);border-radius:100px;padding:2px 7px;font-weight:600}
+.lvl:hover,.lvl.on{background:var(--peach-soft);border-color:var(--orange);transform:translateY(-3px);box-shadow:0 10px 24px rgba(255,94,26,.14)}
+.lvl:hover .lnum,.lvl.on .lnum{border-color:var(--orange);color:var(--orange)}
+.lvl.top{background:linear-gradient(100deg,var(--orange),var(--orange-2));border-color:transparent;color:#fff;box-shadow:0 12px 30px rgba(255,94,26,.30)}
+.lvl.top .lnum{border-color:rgba(255,255,255,.55);color:#fff}
+.lvl.top:hover,.lvl.top.on{filter:brightness(1.04);background:linear-gradient(100deg,var(--orange),var(--orange-2))}
+.lvl.w1{width:min(780px,98%)}
+.lvl.w2{width:min(640px,84%)}
+.lvl.wide{width:min(560px,80%)}
+.lvl.half{flex:1;max-width:280px}
+.lvl.essence{min-width:260px}
+.pyr-arrow{color:var(--muted-2);font-size:15px;line-height:0;margin:-3px 0}
+.pyr-info{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px;min-height:280px;position:relative;overflow:hidden}
+.pyr-info::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,var(--peach),transparent);top:-90px;right:-70px;opacity:.55}
+
+/* schema canvas (STATE OF MIND diagram style: airy light-gray board) */
+.schema-canvas{background:#ececed;border-radius:28px;padding:48px 44px;margin-top:8px}
+.schema-cap{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.schema-cap .sc-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:22px;letter-spacing:.02em}
+.schema-cap .sc-h{font-size:14px;color:var(--muted)}
+.wheel-wrap{max-width:680px;margin:22px auto 6px}
+.wheel-wrap svg{width:100%;height:auto;display:block}
+.wheel text{font-family:var(--font-body)}
+.wheel .w-title{font-family:var(--font-display);font-weight:600;fill:var(--orange);letter-spacing:.02em}
+.wheel .w-title.cur{fill:var(--orange)}
+.wheel .w-desc{fill:#2a2a2e}
+.wheel .w-circle{fill:#ececed;stroke:var(--ink);stroke-width:2.2}
+.wheel .w-circle.cur{fill:var(--peach-soft);stroke:var(--orange);stroke-width:3}
+.wheel .w-line{stroke:var(--ink);stroke-width:2}
+.wheel .w-pill{fill:#ececed;stroke:var(--ink);stroke-width:2}
+.wheel .w-meta{font-family:var(--font-display);font-weight:600;fill:var(--ink);letter-spacing:.14em}
+.wheel .w-arc{fill:none;stroke:var(--orange);stroke-width:2.2}
+.wheel .w-tag{font-family:var(--font-display);font-weight:600;fill:#fff;letter-spacing:.1em}
+.schema-bridge{text-align:center;max-width:640px;margin:30px auto 4px;color:var(--ink-soft);font-size:16.5px}
+.schema-bridge b{color:var(--orange)}
+.pyr-info .pi-k{position:relative;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--orange);margin-bottom:6px}
+.pyr-info .pi-t{position:relative;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:28px;line-height:1;margin-bottom:16px}
+.pyr-info .pi-d{position:relative;color:var(--ink-soft);font-size:17px}
+.pyr-info .pi-tag{position:relative;display:inline-block;margin-top:20px;font-size:13px;color:var(--muted);font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em}
+
+/* ========== FLOOR wrappers ========== */
+.floor-badge{display:inline-flex;align-items:center;gap:12px;background:#e9e9ea;color:#48484d;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:12px;padding:9px 16px 9px 10px;border-radius:100px;margin-bottom:22px}
+.floor-badge .fb-n{background:var(--orange);color:#fff;border-radius:100px;padding:3px 10px;font-weight:600}
+
+/* ========== FLOOR 1 : segments ========== */
+.floor1{background:var(--panel)}
+.prio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prio{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px;transition:.3s;position:relative;overflow:hidden}
+.prio:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(20,20,25,.1)}
+.prio .rank{font-family:var(--font-display);font-weight:700;font-size:54px;line-height:.8;letter-spacing:-.02em}
+.prio .rank small{font-size:15px;letter-spacing:.14em;display:block;margin-top:8px;font-weight:500}
+.prio .p-desc{color:var(--muted);font-size:15.5px;margin:18px 0 22px;min-height:66px}
+.prio .seg{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+.prio .seg .sd{width:8px;height:8px;border-radius:50%;flex:none}
+.prio .seg .sname{font-size:16.5px;color:var(--ink-soft)}
+.prio.p1{background:linear-gradient(160deg,#fff,var(--peach-soft))}
+.prio.p1 .rank,.prio.p1 .seg .sd{color:var(--orange)}
+.prio.p1 .seg .sd{background:var(--orange)}
+.prio.p1 .badge-mini{background:var(--orange)}
+.prio.p2 .rank{color:var(--ink)}
+.prio.p2 .seg .sd{background:var(--orange-2)}
+.prio.p2 .badge-mini{background:var(--orange-2)}
+.prio.p3 .rank{color:var(--muted-2)}
+.prio.p3 .seg .sd{background:var(--muted-2)}
+.prio.p3 .badge-mini{background:var(--muted-2)}
+.badge-mini{position:absolute;top:26px;right:26px;color:#fff;font-family:var(--font-display);text-transform:uppercase;font-size:10px;letter-spacing:.12em;padding:5px 10px;border-radius:100px}
+
+/* ========== FLOOR 2 : values ========== */
+.floor2{background:var(--bg)}
+.val-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.val{position:relative;aspect-ratio:3/4;background:#f0f0f1;border:1px solid var(--line);border-radius:20px;padding:24px;transition:.32s cubic-bezier(.2,.7,.3,1);cursor:default;display:flex;flex-direction:column;overflow:hidden}
+.val::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 80% 10%,rgba(255,255,255,.35),transparent 60%);opacity:0;transition:.32s;pointer-events:none}
+.val:hover{background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-color:transparent;transform:translateY(-6px);box-shadow:0 24px 46px rgba(255,94,26,.30)}
+.val:hover::after{opacity:1}
+.val .v-idx{position:relative;font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--muted-2);letter-spacing:.12em}
+.val:hover .v-idx{color:rgba(255,255,255,.85)}
+.val .v-name{position:relative;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:19px;letter-spacing:.01em;margin-top:auto;margin-bottom:10px;color:var(--ink);line-height:1.03;transition:.28s}
+.val:hover .v-name{color:#fff}
+.val .v-desc{position:relative;color:var(--muted);font-size:14.5px;transition:.28s}
+.val:hover .v-desc{color:rgba(255,255,255,.94)}
+.floor2 .converge{margin-bottom:40px;background:var(--peach-soft);border:1px solid var(--peach);border-radius:18px;padding:24px 28px}
+.floor2 .converge p{font-size:16.5px;color:var(--ink-soft)}
+.floor2 .converge b{color:var(--orange);font-weight:700}
+
+/* ========== FLOOR 3 : benefits ========== */
+.floor3{background:var(--panel)}
+.split-label{display:flex;align-items:center;gap:16px;margin:0 0 28px}
+.split-label .sl-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:26px}
+.split-label .sl-em{font-size:26px}
+.split-label .sl-hint{margin-left:auto;font-size:13px;color:var(--muted);font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em}
+.rtb-list{display:flex;flex-direction:column;gap:14px;margin-bottom:70px}
+.acc{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.3s}
+.acc:hover{border-color:var(--peach)}
+.acc.open{border-color:var(--orange);box-shadow:0 18px 40px rgba(255,94,26,.12)}
+.acc-head{display:flex;align-items:center;gap:20px;padding:24px 26px;cursor:pointer;user-select:none}
+.acc-head .an{font-family:var(--font-display);font-weight:700;font-size:34px;color:var(--peach);line-height:.8;flex:none;width:52px;transition:.3s}
+.acc.open .acc-head .an,.acc:hover .acc-head .an{color:var(--orange)}
+.acc-head .at{font-family:var(--font-display);text-transform:uppercase;font-weight:500;font-size:20px;letter-spacing:.005em;flex:1;line-height:1.05}
+.acc-head .ax{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;transition:.35s;position:relative}
+.acc-head .ax::before,.acc-head .ax::after{content:"";position:absolute;background:var(--ink);border-radius:2px}
+.acc-head .ax::before{width:14px;height:2px}
+.acc-head .ax::after{width:2px;height:14px;transition:.35s}
+.acc.open .acc-head .ax{background:var(--orange);border-color:var(--orange)}
+.acc.open .acc-head .ax::before,.acc.open .acc-head .ax::after{background:#fff}
+.acc.open .acc-head .ax::after{transform:scaleY(0)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.acc-body-inner{padding:0 26px 26px 78px}
+.acc-body-inner .rtb-cap{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--orange);margin-bottom:14px}
+.rtb-item{display:flex;gap:12px;padding:9px 0;color:var(--ink-soft);font-size:16px;border-top:1px solid var(--panel-2)}
+.rtb-item:first-of-type{border-top:none}
+.rtb-item .rd{color:var(--orange);flex:none;font-weight:700}
+.rtb-item .repeat{font-size:10px;background:var(--peach-soft);color:var(--orange);border:1px solid var(--peach);border-radius:100px;padding:1px 8px;font-family:var(--font-display);letter-spacing:.08em;text-transform:uppercase;align-self:center;margin-left:6px;white-space:nowrap}
+
+/* emotional */
+.emo-grid{display:flex;flex-direction:column;gap:14px}
+.emo{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.emo:hover{transform:translateX(6px);border-color:var(--orange)}
+.emo .emo-top{display:flex;align-items:center;gap:18px}
+.emo .en{font-family:var(--font-display);font-weight:700;font-size:24px;color:var(--peach);width:44px;flex:none;transition:.3s}
+.emo:hover .en{color:var(--orange)}
+.emo .et{font-family:var(--font-display);text-transform:uppercase;font-weight:500;letter-spacing:.015em;font-size:19px;color:var(--ink);flex:1;line-height:1.06}
+.emo .etog{font-size:12px;color:var(--muted);font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em}
+.emo-tags{display:flex;flex-wrap:wrap;gap:8px;max-height:0;overflow:hidden;transition:max-height .4s ease,margin .4s ease,opacity .4s ease;opacity:0;margin-top:0}
+.emo.open .emo-tags{max-height:120px;opacity:1;margin-top:18px}
+.emo-tags span{background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:7px 14px;font-size:14px;color:var(--ink-soft)}
+
+/* ========== FLOOR 4 : archetype ========== */
+.floor4{background:var(--bg);overflow:hidden}
+.floor4 .blob.ba{width:520px;height:520px;background:radial-gradient(circle,#ffd6b8,#fff);top:-120px;left:-140px;opacity:.5;animation:float2 22s ease-in-out infinite}
+.arch-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:8px 0 30px;position:relative;z-index:2}
+.arch{border-radius:var(--r);padding:34px;position:relative;overflow:hidden;transition:.35s}
+.arch.sage{background:var(--ink);color:#fff}
+.arch.mage{background:linear-gradient(155deg,var(--orange),#ff7a33 60%,#ffab5e);color:#fff}
+.arch:hover{transform:translateY(-6px);box-shadow:0 26px 50px rgba(20,20,25,.2)}
+.arch .a-em{font-size:42px;margin-bottom:16px;display:block}
+.arch .a-role{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:12px;opacity:.7;margin-bottom:4px}
+.arch .a-name{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:40px;line-height:.95;margin-bottom:18px}
+.arch .a-desc{font-size:16.5px;line-height:1.6;opacity:.94}
+.arch .plus{position:absolute;top:50%;right:-33px;transform:translateY(-50%);z-index:5;width:52px;height:52px;border-radius:50%;background:#fff;color:var(--orange);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:26px;box-shadow:0 8px 22px rgba(20,20,25,.16)}
+.arch-bridge{position:relative;z-index:2;text-align:center;max-width:820px;margin:0 auto 44px;font-family:var(--font-serif);font-style:italic;font-size:clamp(20px,2.5vw,26px);line-height:1.4;color:var(--ink)}
+.arch-note{position:relative;z-index:2;text-align:center;font-size:14px;color:var(--muted);margin-bottom:40px}
+.character{position:relative;z-index:2;background:#ececed;color:var(--ink);border-radius:28px;padding:52px;overflow:hidden}
+.character::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(255,94,26,.22),transparent);bottom:-170px;right:-110px}
+.character::after{content:"\201D";position:absolute;font-family:var(--font-display);font-size:300px;line-height:1;color:rgba(0,0,0,.05);top:-30px;left:30px}
+.character .c-k{position:relative;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--orange-2);margin-bottom:22px}
+.character .c-text{position:relative;font-family:var(--font-body);font-weight:400;text-transform:uppercase;font-size:clamp(17px,2.15vw,24px);line-height:1.5;letter-spacing:.005em}
+.character .c-text .hl{color:var(--orange);font-style:normal}
+
+/* ========== NEXT / positioning teaser ========== */
+.next{background:linear-gradient(180deg,#0d0d0f, #17130f);color:#fff;overflow:hidden}
+.next .blob.bn{width:640px;height:640px;background:radial-gradient(circle,rgba(255,94,26,.7),transparent);top:-200px;right:-160px;opacity:.5;animation:float1 18s ease-in-out infinite}
+.divider-emoji{position:relative;text-align:center;margin-bottom:70px}
+.divider-emoji .big{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(60px,13vw,190px);line-height:.9;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.4px rgba(255,255,255,.18);opacity:.9}
+.divider-emoji .em{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(56px,10vw,120px)}
+.next-inner{position:relative;z-index:2}
+.next-lead{max-width:760px;margin:0 auto 56px;text-align:center}
+.next-lead .nk{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.18em;font-size:13px;color:var(--orange-2);margin-bottom:22px}
+.next-lead h2{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(30px,4.6vw,56px);line-height:1;margin-bottom:24px}
+.next-lead p{font-size:19px;color:rgba(255,255,255,.72)}
+.next-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.nstep{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px;transition:.3s}
+.nstep:hover{background:rgba(255,94,26,.14);border-color:var(--orange);transform:translateY(-6px)}
+.nstep .ns-n{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--orange-2);margin-bottom:14px}
+.nstep .ns-t{font-family:var(--font-display);text-transform:uppercase;font-weight:500;font-size:18px;line-height:1.1;margin-bottom:8px}
+.nstep .ns-d{font-size:14.5px;color:rgba(255,255,255,.6)}
+.next-foot{position:relative;z-index:2;text-align:center;margin-top:80px;font-family:var(--font-serif);font-style:italic;font-size:clamp(22px,3vw,34px);line-height:1.4}
+.next-foot .hl{color:var(--orange-2)}
+
+/* ========== FOOTER ========== */
+footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
+.foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.foot-brand{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:26px;line-height:.85}
+.foot-brand small{display:block;font-size:11px;letter-spacing:.28em;color:var(--muted);margin-top:6px}
+.foot-meta{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--muted);text-align:right}
+.foot-meta a{color:var(--orange-2);text-decoration:none}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:960px){
+  .sec-pad{padding:84px 0}
+  .pyr-layout{grid-template-columns:1fr;gap:34px}
+  .prio-grid{grid-template-columns:1fr}
+  .val-grid{grid-template-columns:1fr 1fr}
+  .arch-pair{grid-template-columns:1fr;gap:30px}
+  .arch .plus{top:auto;bottom:-33px;right:50%;transform:translateX(50%)}
+  .next-steps{grid-template-columns:1fr 1fr}
+  .character{padding:34px}
+}
+@media(max-width:600px){
+  body{font-size:16.5px}
+  .wrap{padding:0 20px}
+  .val-grid{grid-template-columns:1fr}
+  .next-steps{grid-template-columns:1fr}
+  .hero-meta{gap:24px}
+  .acc-body-inner{padding:0 22px 22px 22px}
+  .topbar .tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="brand">STATE<br>OF MIND<small style="letter-spacing:.28em">BRAND PLATFORM</small></div>
+  <div class="tag">Клиент — COLLAB · 2026</div>
+</div>
+
+<nav class="dotnav" id="dotnav">
+  <a data-to="method"><span class="lbl">Метод</span><span class="dt"></span></a>
+  <a data-to="floor1"><span class="lbl">Сегменты</span><span class="dt"></span></a>
+  <a data-to="floor2"><span class="lbl">Ценности</span><span class="dt"></span></a>
+  <a data-to="floor3"><span class="lbl">Преимущества</span><span class="dt"></span></a>
+  <a data-to="floor4"><span class="lbl">Архетип</span><span class="dt"></span></a>
+  <a data-to="next"><span class="lbl">Дальше</span><span class="dt"></span></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="mesh">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="kick">
+      <span class="pill">Этап 3</span>
+      <span class="txt">Маркетинговый аудит → Платформа бренда</span>
+    </div>
+    <h1>Из аудита<span class="l2">рождается <span class="grad-text">платформа</span></span><span class="l2">бренда</span></h1>
+    <p class="hero-sub">На основе проведённого маркетингового аудита мы собираем платформу бренда COLLAB — <span class="muted">фундамент из данных и выводов, на котором дальше строится позиционирование.</span></p>
+    <div class="hero-meta">
+      <div class="item"><div class="k">Клиент</div><div class="v">COLLAB</div></div>
+      <div class="item"><div class="k">Метод</div><div class="v">VBBP</div></div>
+      <div class="item"><div class="k">Разработка</div><div class="v">STATE OF MIND</div></div>
+    </div>
+  </div>
+  <div class="scrollcue">Листайте<div class="line"></div></div>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section class="method sec-pad" id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Методология</div>
+      <h2 class="sec-title">Как устроена<br>платформа. Метод VBBP</h2>
+      <p class="sec-sub">Платформа собирается снизу вверх. В основании — <b>аудитория</b>. Над ней — <b>её ценности</b>, то есть что аудитория ждёт от рынка. Наш ответ на этот запрос — <b>рациональные и эмоциональные преимущества</b>. Их доказательства: <b>RTB</b> для рациональных и <b>архетип с характером бренда</b> для эмоциональных. На вершине — <b>суть бренда и позиционирование</b>.</p>
+    </div>
+
+    <div class="schema-canvas reveal">
+      <div class="schema-cap">
+        <span class="sc-t">Метод STATE OF MIND</span>
+        <span class="sc-h">полный путь разработки бренда — сейчас мы на этапе PLATFORM</span>
+      </div>
+
+      <div class="wheel-wrap">
+        <svg class="wheel" viewBox="0 0 1000 1060" role="img" aria-label="Метод разработки бренда STATE OF MIND">
+          <defs>
+            <marker id="ah" markerWidth="10" markerHeight="10" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L6,3 L0,6" fill="none" stroke="#ff5e1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+
+          <!-- flow arcs -->
+          <path class="w-arc" d="M654.9,188.4 A375 375 0 0 1 732.9,236" marker-end="url(#ah)"/>
+          <path class="w-arc" d="M872.2,484.3 A375 375 0 0 1 872.2,575.7" marker-end="url(#ah)"/>
+          <path class="w-arc" d="M732.9,824 A375 375 0 0 1 654.9,871.6" marker-end="url(#ah)"/>
+          <path class="w-arc" d="M346.2,872 A375 375 0 0 1 267.4,824" marker-end="url(#ah)"/>
+          <path class="w-arc" d="M127.8,575.7 A375 375 0 0 1 127.8,484.3" marker-end="url(#ah)"/>
+          <path class="w-arc" d="M267.1,236 A375 375 0 0 1 345.1,188.4" marker-end="url(#ah)"/>
+
+          <!-- divider + metaphor -->
+          <line class="w-line" x1="45" y1="530" x2="372" y2="530"/>
+          <line class="w-line" x1="628" y1="530" x2="955" y2="530"/>
+          <rect class="w-pill" x="382" y="500" width="236" height="60" rx="30"/>
+          <text class="w-meta" x="500" y="539" text-anchor="middle" font-size="26">МЕТАФОРА</text>
+
+          <!-- circles -->
+          <!-- RESEARCH -->
+          <circle class="w-circle" cx="500" cy="150" r="140"/>
+          <text class="w-title" x="500" y="128" text-anchor="middle" font-size="25">ИССЛЕДОВАНИЕ</text>
+          <text class="w-desc" x="500" y="160" text-anchor="middle" font-size="18">рынок, потребитель,</text>
+          <text class="w-desc" x="500" y="186" text-anchor="middle" font-size="18">конкуренты</text>
+
+          <!-- PLATFORM (current) -->
+          <circle class="w-circle cur" cx="830" cy="360" r="140"/>
+          <rect x="772" y="196" width="116" height="30" rx="15" fill="#0d0d0f"/>
+          <text class="w-tag" x="830" y="216" text-anchor="middle" font-size="13">СЕЙЧАС</text>
+          <text class="w-title cur" x="830" y="340" text-anchor="middle" font-size="25">ПЛАТФОРМА</text>
+          <text class="w-desc" x="830" y="372" text-anchor="middle" font-size="18">сегменты, ценности,</text>
+          <text class="w-desc" x="830" y="398" text-anchor="middle" font-size="18">преимущества, RTB</text>
+
+          <!-- POSITIONING -->
+          <circle class="w-circle" cx="830" cy="700" r="140"/>
+          <text class="w-title" x="830" y="682" text-anchor="middle" font-size="19">ПОЗИЦИОНИРОВАНИЕ</text>
+          <text class="w-desc" x="830" y="712" text-anchor="middle" font-size="18">суть бренда, характер,</text>
+          <text class="w-desc" x="830" y="738" text-anchor="middle" font-size="18">tone of voice</text>
+
+          <!-- IDENTITY -->
+          <circle class="w-circle" cx="500" cy="910" r="140"/>
+          <text class="w-title" x="500" y="892" text-anchor="middle" font-size="25">АЙДЕНТИКА</text>
+          <text class="w-desc" x="500" y="924" text-anchor="middle" font-size="18">элементы, решения,</text>
+          <text class="w-desc" x="500" y="950" text-anchor="middle" font-size="18">гайдлайны</text>
+
+          <!-- PROMOTION -->
+          <circle class="w-circle" cx="170" cy="700" r="140"/>
+          <text class="w-title" x="170" y="682" text-anchor="middle" font-size="23">ПРОДВИЖЕНИЕ</text>
+          <text class="w-desc" x="170" y="712" text-anchor="middle" font-size="18">стратегия, бюджеты,</text>
+          <text class="w-desc" x="170" y="738" text-anchor="middle" font-size="18">каналы, контент</text>
+
+          <!-- BUSINESS -->
+          <circle class="w-circle" cx="170" cy="360" r="140"/>
+          <text class="w-title" x="170" y="342" text-anchor="middle" font-size="25">БИЗНЕС</text>
+          <text class="w-desc" x="170" y="374" text-anchor="middle" font-size="18">продукты, ресурсы,</text>
+          <text class="w-desc" x="170" y="400" text-anchor="middle" font-size="18">PESTEL, ограничения</text>
+        </svg>
+      </div>
+
+      <p class="schema-bridge">Верхняя половина — стратегия, нижняя — креатив и реализация, между ними — <b>метафора</b>. Платформа завершает стратегическую часть. Вот её внутренняя структура по методу VBBP:</p>
+
+    <div class="pyr-layout">
+      <div class="pyramid" id="pyramid">
+        <div class="pyr-row">
+          <div class="lvl top essence" data-k="5" data-title="Суть бренда"
+            data-desc="Вершина платформы. Ёмкая формулировка того, чем является бренд. Появляется на следующем, креативном этапе — вместе с позиционированием." data-tag="Появится на этапе позиционирования">
+            <span class="lnum">5</span> Суть бренда
+          </div>
+        </div>
+        <div class="pyr-arrow">▲</div>
+        <div class="pyr-row">
+          <div class="lvl half" data-k="4a" data-title="Reasons to believe"
+            data-desc="Конкретные доказательства рациональных преимуществ: экспертизы, процессы, факты и подходы, которые подтверждают, что преимущество — не декларация." data-tag="Доказывают рациональное">
+            <span class="lnum">4</span> RTB
+          </div>
+          <div class="lvl half" data-k="4b" data-title="Характер бренда"
+            data-desc="Доказательство эмоциональных преимуществ. Архетип и характер бренда задают тон, поведение и ощущение, которое остаётся от контакта с брендом." data-tag="Доказывает эмоциональное">
+            <span class="lnum">4</span> Характер
+          </div>
+        </div>
+        <div class="pyr-arrow">▲</div>
+        <div class="pyr-row">
+          <div class="lvl half" data-k="3a" data-title="Рациональные преимущества"
+            data-desc="Наш рациональный ответ на запрос аудитории: ресурсы, умения и экспертизы, которые закрывают её потребности измеримо и доказуемо." data-tag="Наш ответ · разум">
+            <span class="lnum">3</span> Рацио
+          </div>
+          <div class="lvl half" data-k="3b" data-title="Эмоциональные преимущества"
+            data-desc="Эмоции, которые бренд хочет вызывать. Мы отвечаем не на все запросы, а на те, что совпадают с характером и архетипом бренда." data-tag="Наш ответ · эмоции">
+            <span class="lnum">3</span> Эмоцио
+          </div>
+        </div>
+        <div class="pyr-arrow">▲</div>
+        <div class="pyr-row">
+          <div class="lvl w2" data-k="2" data-title="Ценности аудитории"
+            data-desc="Если объединить запросы всех сегментов и найти общее — получим ценности: что аудитория в целом ждёт от рынка и от агентства." data-tag="Запрос аудитории к рынку">
+            <span class="lnum">2</span> Ценности аудитории
+          </div>
+        </div>
+        <div class="pyr-arrow">▲</div>
+        <div class="pyr-row">
+          <div class="lvl w1" data-k="1" data-title="Сегменты аудитории"
+            data-desc="Основание платформы — все, с кем коммуницирует бренд. У COLLAB 9 сегментов, разделённых на 3 приоритета." data-tag="Основание платформы">
+            <span class="lnum">1</span> Сегменты аудитории
+          </div>
+        </div>
+      </div>
+
+      <div class="pyr-info" id="pyrInfo">
+        <div class="pi-k" id="piK">Наведите на уровень</div>
+        <div class="pi-t" id="piT">Пирамида платформы</div>
+        <div class="pi-d" id="piD">Каждый уровень — этаж платформы. Разработка идёт снизу вверх: от аудитории к сути бренда. Наведите на любой блок, чтобы увидеть его роль.</div>
+        <div class="pi-tag" id="piTag" style="opacity:0"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOOR 1 : SEGMENTS ============ -->
+<section class="floor1 sec-pad" id="floor1">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="floor-badge"><span class="fb-n">Этаж 1</span> Сегменты аудитории</div>
+      <h2 class="sec-title">Девять аудиторий,<br>три приоритета</h2>
+      <p class="sec-sub">У бренда много целевых аудиторий с разным назначением — всего <b>9</b>. Мы разделили их на <b>3 приоритета</b>: от ключевых сегментов текущего рынка до перспективных категорий, требующих новых компетенций.</p>
+    </div>
+
+    <div class="prio-grid">
+      <div class="prio p1 reveal">
+        <span class="badge-mini">Приоритет I</span>
+        <div class="rank">01<small>Ключевые сегменты</small></div>
+        <p class="p-desc">Роли, представляющие основные направления текущего рынка Collab.</p>
+        <div class="seg"><span class="sd"></span><span class="sname">HR / Admin директор</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">Маркетинг / Директор по коммуникациям</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">CEO / Собственник</span></div>
+      </div>
+      <div class="prio p2 reveal">
+        <span class="badge-mini">Приоритет II</span>
+        <div class="rank">02<small>Смежные сегменты</small></div>
+        <p class="p-desc">Открывают новые перспективные направления развития Collab.</p>
+        <div class="seg"><span class="sd"></span><span class="sname">Концертный директор / Продюсер</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">Артист</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">Организатор спортивных событий</span></div>
+      </div>
+      <div class="prio p3 reveal">
+        <span class="badge-mini">Приоритет III</span>
+        <div class="rank">03<small>Перспективные сегменты</small></div>
+        <p class="p-desc">Открывают новые категории рынка и требуют развития новых компетенций.</p>
+        <div class="seg"><span class="sd"></span><span class="sname">Fashion-бренд (через проводника)</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">Fashion-бренд (напрямую)</span></div>
+        <div class="seg"><span class="sd"></span><span class="sname">Частный клиент (B2C)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOOR 2 : VALUES ============ -->
+<section class="floor2 sec-pad" id="floor2">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="floor-badge"><span class="fb-n">Этаж 2</span> Ценности аудитории</div>
+      <h2 class="sec-title">Что аудитория<br>ждёт от рынка</h2>
+    </div>
+    <div class="converge reveal">
+      <p><b>Один список на всех.</b> Если сложить запросы всех девяти сегментов вместе и найти общее — получаем единый список ценностей: то, чего аудитория в целом ждёт от рынка и от агентства.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val reveal"><span class="v-idx">01</span><div class="v-name">Надёжность</div><div class="v-desc">Мероприятие проходит без срывов и не создаёт дополнительных рисков для заказчика.</div></div>
+      <div class="val reveal"><span class="v-idx">02</span><div class="v-name">Качество результата</div><div class="v-desc">Событие соответствует высоким ожиданиям аудитории и выглядит профессионально.</div></div>
+      <div class="val reveal"><span class="v-idx">03</span><div class="v-name">Решение бизнес-задачи</div><div class="v-desc">Мероприятие приносит измеримый результат, а не существует само по себе.</div></div>
+      <div class="val reveal"><span class="v-idx">04</span><div class="v-name">Сильная идея</div><div class="v-desc">Событие имеет концепцию и производит нужное впечатление.</div></div>
+      <div class="val reveal"><span class="v-idx">05</span><div class="v-name">Комфорт в работе</div><div class="v-desc">Агентство берёт организацию на себя, снижая нагрузку на клиента.</div></div>
+      <div class="val reveal"><span class="v-idx">06</span><div class="v-name">Гибкость и индивидуальный подход</div><div class="v-desc">Решение учитывает специфику задачи, аудитории и ограничений.</div></div>
+      <div class="val reveal"><span class="v-idx">07</span><div class="v-name">Учесть запрос</div><div class="v-desc">Агентство слышит и учитывает запрос заказчика.</div></div>
+      <div class="val reveal"><span class="v-idx">08</span><div class="v-name">Культурная актуальность</div><div class="v-desc">Событие говорит с аудиторией на языке своего времени, а не устаревшими форматами.</div></div>
+      <div class="val reveal"><span class="v-idx">09</span><div class="v-name">Современность</div><div class="v-desc">Соответствие актуальным культурным, визуальным и технологическим ожиданиям.</div></div>
+      <div class="val reveal"><span class="v-idx">10</span><div class="v-name">Доверие</div><div class="v-desc">Агентство вызывает уверенность в экспертизе и способности реализовать проект.</div></div>
+      <div class="val reveal"><span class="v-idx">11</span><div class="v-name">Статус и репутация</div><div class="v-desc">Мероприятие усиливает имидж заказчика и подтверждает его уровень.</div></div>
+      <div class="val reveal"><span class="v-idx">12</span><div class="v-name">Эмоции и впечатления</div><div class="v-desc">Событие оставляет сильный эмоциональный отклик и запоминается.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOOR 3 : BENEFITS ============ -->
+<section class="floor3 sec-pad" id="floor3">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="floor-badge"><span class="fb-n">Этаж 3</span> Преимущества</div>
+      <h2 class="sec-title">Наш ответ<br>на запрос</h2>
+      <p class="sec-sub">У аудитории есть запрос к рынку — а у нас есть ресурсы, умения и экспертиза, которые на него отвечают. Сначала — <b>рациональные преимущества</b>, затем <b>эмоциональные</b>.</p>
+    </div>
+
+    <!-- rational -->
+    <div class="split-label reveal">
+      <span class="sl-t">Рациональные преимущества</span>
+      <span class="sl-hint">Нажмите → доказательства (RTB)</span>
+    </div>
+
+    <div class="rtb-list">
+      <div class="acc reveal">
+        <div class="acc-head"><span class="an">01</span><span class="at">Превращаем мероприятия в инструмент развития бизнеса и бренда</span><span class="ax"></span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <div class="rtb-cap">Reasons to believe</div>
+          <div class="rtb-item"><span class="rd">→</span><span>Умеем работать с корпоративными KPI — проектируем сценарий под конкретную бизнес-цель, а не ради эффектного шоу.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Помогаем бренду транслировать свои ценности через событие.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Событие работает после окончания: контент, виральность, заготовки для инфоповода.</span></div>
+        </div></div>
+      </div>
+
+      <div class="acc reveal">
+        <div class="acc-head"><span class="an">02</span><span class="at">Сильный креативный подход и смелые концепции</span><span class="ax"></span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <div class="rtb-cap">Reasons to believe</div>
+          <div class="rtb-item"><span class="rd">→</span><span>Экспертиза в работе с артистами и шоу-индустрией.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Уникальная режиссёрско-постановочная экспертиза.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Экспертиза в фешн.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Постоянно развиваемся и осваиваем новые форматы.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Находим неожиданные идеи даже для привычных форматов.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Работаем на стыке креатива, режиссуры и современных технологий.</span></div>
+        </div></div>
+      </div>
+
+      <div class="acc reveal">
+        <div class="acc-head"><span class="an">03</span><span class="at">Воплощаем сложные идеи так, как они были задуманы</span><span class="ax"></span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <div class="rtb-cap">Reasons to believe</div>
+          <div class="rtb-item"><span class="rd">→</span><span>Коллаборативная модель.</span><span class="repeat">повтор · п.4</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Менеджмент и процессы — сохраняем контроль на всех этапах.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Предвидим потенциальные сложности заранее.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Включённость первых лиц.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Сохраняем концепт несмотря на сложности: находим решения вместо компромиссов.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Не теряем качество при масштабе.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Снижаем неопределённость при реализации сложных проектов.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Экспертиза в разных рынках, бюджетах и форматах.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Быстро находим эффективные решения даже в нестандартных условиях.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Держим баланс между креативом, сроками и бюджетом.</span></div>
+        </div></div>
+      </div>
+
+      <div class="acc reveal">
+        <div class="acc-head"><span class="an">04</span><span class="at">Строим подход из расчёта долгосрочных отношений с клиентом</span><span class="ax"></span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          <div class="rtb-cap">Reasons to believe</div>
+          <div class="rtb-item"><span class="rd">→</span><span>Честно рекомендуем оптимальное решение.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Гибкость.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Коллаборативная модель.</span><span class="repeat">повтор · п.3</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Собираем оптимальную команду.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Работаем под задачу, а не по шаблону.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Закрываем проект под ключ.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Помогаем принимать более сильные решения, чем клиент мог бы принять самостоятельно.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Думаем об интересах клиента, а не только об отдельном проекте.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Адаптируемся под процессы клиента: становимся частью его команды, а не внешним подрядчиком.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Предлагаем решения проактивно, а не только отвечаем на запрос.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Быстро погружаемся в специфику бизнеса.</span></div>
+          <div class="rtb-item"><span class="rd">→</span><span>Предсказуемый результат.</span></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- emotional -->
+    <div class="split-label reveal">
+      <span class="sl-t">Эмоциональные преимущества</span>
+      <span class="sl-hint">Нажмите → что за этим стоит</span>
+    </div>
+    <div class="emo-grid">
+      <div class="emo reveal"><div class="emo-top"><span class="en">01</span><span class="et">«Я чувствую себя уверенно»</span><span class="etog">показать →</span></div>
+        <div class="emo-tags"><span>надёжность</span><span>доверие</span><span>решение бизнес-задачи</span><span>предсказуемость</span><span>качество</span></div></div>
+      <div class="emo reveal"><div class="emo-top"><span class="en">02</span><span class="et">«Я чувствую, что меня понимают»</span><span class="etog">показать →</span></div>
+        <div class="emo-tags"><span>учли запрос</span><span>гибкость</span><span>индивидуальный подход</span><span>партнёрство</span></div></div>
+      <div class="emo reveal"><div class="emo-top"><span class="en">03</span><span class="et">«Я чувствую гордость за свою работу»</span><span class="etog">показать →</span></div>
+        <div class="emo-tags"><span>сильная идея</span><span>статус</span><span>качественный результат</span><span>сильные эмоции участников</span></div></div>
+      <div class="emo reveal"><div class="emo-top"><span class="en">04</span><span class="et">«Я чувствую свободу мыслить смелее»</span><span class="etog">показать →</span></div>
+        <div class="emo-tags"><span>комфорт</span><span>агентство берёт многое на себя</span><span>можно реализовать сложную идею</span><span>можно не бояться рисков</span></div></div>
+      <div class="emo reveal"><div class="emo-top"><span class="en">05</span><span class="et">«Я чувствую, что делаю стиль»</span><span class="etog">показать →</span></div>
+        <div class="emo-tags"><span>современно и актуально</span><span>неожиданные и свежие решения</span><span>проекты, которыми хочется делиться</span><span>бренд выглядит прогрессивным</span><span>сильное впечатление</span><span>позитивная обратная связь</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOOR 4 : ARCHETYPE ============ -->
+<section class="floor4 sec-pad" id="floor4">
+  <div class="mesh"><div class="blob ba"></div></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="floor-badge"><span class="fb-n">Этаж 4</span> Архетип и характер бренда</div>
+      <h2 class="sec-title">Доказательство<br>эмоций — характер</h2>
+      <p class="sec-sub">Если RTB доказывают рациональные преимущества, то эмоциональные доказывает <b>архетип и характер бренда</b>. Наиболее убедительной выглядит связка <b>Мудрец + Маг</b> — оба понимаются не в классическом смысле, а в контексте задач бренда.</p>
+    </div>
+
+    <div class="arch-pair reveal">
+      <div class="arch sage">
+        <div class="a-role">Архетип · 01</div>
+        <div class="a-name">Мудрец</div>
+        <p class="a-desc">Это не академический эксперт и не наставник, который поучает клиента. Это интеллектуальный партнёр, который благодаря уникальному опыту и глубокой экспертизе помогает увидеть более сильное решение. Он понимает истинную природу задачи, умеет находить оптимальный путь и превращает мероприятие не в самоцель, а в инструмент развития бизнеса и бренда.</p>
+        <div class="plus">+</div>
+      </div>
+      <div class="arch mage">
+        <div class="a-role">Архетип · 02</div>
+        <div class="a-name">Маг</div>
+        <p class="a-desc">Это не про волшебство и эффект ради эффекта. Это способность изменить угол зрения — увидеть возможности там, где другие видят обычную задачу. Переосмыслить привычный формат, найти неожиданную идею, соединить разные области экспертизы и создать решение, которое меняет восприятие бренда и производит сильное впечатление.</p>
+      </div>
+    </div>
+
+    <p class="arch-bridge reveal">Через уникальный набор знаний, экспертизы и умение посмотреть на задачу под неожиданным углом Collab помогает создавать решения, которые невозможно было увидеть с первого взгляда.</p>
+
+    <div class="character reveal">
+      <div class="c-k">Характер бренда</div>
+      <p class="c-text">Это не консультант и не психолог. Это человек, который после первой встречи заставляет тебя думать: <span class="hl">«Чёрт, почему мы сами до этого не додумались?»</span> У него классный вкус и при этом очень трезвая голова. С ним возникает ощущение: можно замахнуться круче. Потому что он не боится амбиций и не терпит банальности. Он спокойно реагирует на сложность, но не даёт скатиться в скуку. Ему веришь, потому что за каждой смелой мыслью есть опыт и понимание, как её приземлить. И после общения остаётся не просто спокойствие, а азарт — <span class="hl">«мы сделаем что-то, о чём будут говорить».</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT / POSITIONING ============ -->
+<section class="next sec-pad" id="next">
+  <div class="mesh"><div class="blob bn"></div></div>
+  <div class="wrap next-inner">
+    <div class="divider-emoji reveal">
+      <div class="big">Дальше</div>
+      <div class="em">🚀</div>
+    </div>
+
+    <div class="next-lead reveal">
+      <div class="nk">Данные аудита — зафиксированы</div>
+      <h2>Здесь заканчиваются<br>данные. Начинается<br>креатив</h2>
+      <p>Всё, что выше — выводы маркетингового аудита, уложенные в платформу бренда. Это фундамент. Следующий шаг — креативный: на его основе мы разработаем <b style="color:#fff">позиционирование</b> и сопроводим его визуальной метафорой и референсами.</p>
+    </div>
+
+    <div class="next-steps">
+      <div class="nstep reveal"><div class="ns-n">01</div><div class="ns-t">Зона конкуренции</div><div class="ns-d">Где и с кем реально конкурирует бренд.</div></div>
+      <div class="nstep reveal"><div class="ns-n">02</div><div class="ns-t">Позиционирующая идея</div><div class="ns-d">Ключевая мысль, отстраивающая бренд от других.</div></div>
+      <div class="nstep reveal"><div class="ns-n">03</div><div class="ns-t">Определение по Трауту</div><div class="ns-d">Точная формула позиционирования бренда.</div></div>
+      <div class="nstep reveal"><div class="ns-n">04</div><div class="ns-t">Суть бренда · метафора</div><div class="ns-d">Креативная и визуальная метафора + референсы.</div></div>
+    </div>
+
+    <p class="next-foot reveal">Это то, что мы принесём <span class="hl">на следующую встречу.</span></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">STATE OF MIND<small>Платформа бренда</small></div>
+    <div class="foot-meta">Клиент — COLLAB · 2026<br>Метод VBBP · <a href="https://www.stfmind.com" target="_blank" rel="noopener">stfmind.com</a></div>
+  </div>
+</footer>
+
+<script>
+/* topbar scrolled */
+const topbar=document.getElementById('topbar');
+addEventListener('scroll',()=>{topbar.classList.toggle('scrolled',scrollY>40)},{passive:true});
+
+/* pyramid interactive info */
+(function(){
+  const info={k:document.getElementById('piK'),t:document.getElementById('piT'),d:document.getElementById('piD'),tag:document.getElementById('piTag')};
+  const lvls=document.querySelectorAll('#pyramid .lvl');
+  function show(el){
+    lvls.forEach(l=>l.classList.remove('on'));
+    el.classList.add('on');
+    info.k.textContent='Уровень '+el.dataset.k.replace(/[ab]/,'');
+    info.t.textContent=el.dataset.title;
+    info.d.textContent=el.dataset.desc;
+    info.tag.textContent=el.dataset.tag;
+    info.tag.style.opacity=1;
+  }
+  lvls.forEach(l=>{
+    l.addEventListener('mouseenter',()=>show(l));
+    l.addEventListener('click',()=>show(l));
+  });
+})();
+
+/* rational accordion */
+document.querySelectorAll('.acc').forEach(acc=>{
+  const head=acc.querySelector('.acc-head');
+  const body=acc.querySelector('.acc-body');
+  head.addEventListener('click',()=>{
+    const isOpen=acc.classList.contains('open');
+    if(isOpen){acc.classList.remove('open');body.style.maxHeight=null;}
+    else{acc.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
+  });
+});
+/* keep open accordion sized on resize */
+addEventListener('resize',()=>{
+  document.querySelectorAll('.acc.open .acc-body').forEach(b=>{b.style.maxHeight=b.scrollHeight+'px'});
+});
+
+/* emotional toggle */
+document.querySelectorAll('.emo').forEach(e=>{
+  e.addEventListener('click',()=>{
+    e.classList.toggle('open');
+    const tog=e.querySelector('.etog');
+    tog.textContent=e.classList.contains('open')?'скрыть ↑':'показать →';
+  });
+});
+
+/* reveal on scroll */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* dot nav */
+(function(){
+  const links=[...document.querySelectorAll('.dotnav a')];
+  links.forEach(a=>a.addEventListener('click',()=>{
+    document.getElementById(a.dataset.to).scrollIntoView({behavior:'smooth'});
+  }));
+  const secs=links.map(a=>document.getElementById(a.dataset.to));
+  addEventListener('scroll',()=>{
+    let idx=-1;
+    secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*0.4)idx=i;});
+    links.forEach((a,i)=>a.classList.toggle('active',i===idx));
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
