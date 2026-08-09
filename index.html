@@ -351,6 +351,16 @@ section{position:relative}
 .idea-final-note{margin:32px auto 0;max-width:560px;font-size:16px;color:rgba(255,255,255,.55);line-height:1.6}
 .reveal.reveal-big{transform:translateY(42px) scale(.96);transition:opacity 1.05s ease,transform 1.05s cubic-bezier(.16,.8,.24,1)}
 
+/* ========== POSITIONING DEFINITION (step 03) ========== */
+.def-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.def-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:32px 34px}
+.def-k{font-family:var(--font-display);text-transform:uppercase;font-size:12.5px;letter-spacing:.14em;color:var(--orange-2);margin-bottom:14px}
+.def-v{font-size:18.5px;line-height:1.44;color:#fff}
+.def-final{margin-top:26px;background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-radius:var(--r);padding:48px 50px;color:#fff;position:relative;overflow:hidden}
+.def-final::after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent);top:-130px;right:-100px}
+.def-final-k{font-family:var(--font-display);text-transform:uppercase;font-size:13px;letter-spacing:.16em;opacity:.85;margin-bottom:18px;position:relative}
+.def-final-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(22px,2.6vw,34px);line-height:1.3;position:relative;max-width:900px}
+
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
 .foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
@@ -377,6 +387,7 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .flow-arrow{display:none}
   .zone-grid{grid-template-columns:1fr}
   .idea-quotes{grid-template-columns:1fr}
+  .def-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -511,6 +522,7 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="zone"><span class="lbl">Зона</span><span class="dt"></span></a>
   <a data-to="idea"><span class="lbl">Идея</span><span class="dt"></span></a>
   <a data-to="idea-final"><span class="lbl">Формула</span><span class="dt"></span></a>
+  <a data-to="definition"><span class="lbl">Определение</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -992,6 +1004,41 @@ html.locked body{overflow:hidden;height:100vh}
     <div class="idea-final-k reveal">Позиционирующая идея</div>
     <h3 class="idea-final reveal reveal-big">Яркие впечатления через мастерство</h3>
     <p class="idea-final-note reveal">На этой формулировке строится всё дальнейшее: определение позиционирования и метафора бренда.</p>
+  </div>
+</section>
+
+<!-- ============ POSITIONING DEFINITION ============ -->
+<section class="dark-sec sec-pad" id="definition">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Позиционирование · Шаг 03</div>
+      <h2 class="sec-title">Определение<br>позиционирования</h2>
+      <p class="sec-sub">Собираем зону конкуренции, категорию и позиционирующую идею в точную формулировку по методу Траута: кто мы, для кого и чем отличаемся.</p>
+    </div>
+
+    <div class="def-grid reveal">
+      <div class="def-item">
+        <div class="def-k">Целевая аудитория</div>
+        <div class="def-v">Компании корпоративно-деловой среды</div>
+      </div>
+      <div class="def-item">
+        <div class="def-k">Категория</div>
+        <div class="def-v">Event-рынок для корпоративно-деловой среды</div>
+      </div>
+      <div class="def-item">
+        <div class="def-k">Главное отличие</div>
+        <div class="def-v">Мастерство превосходных впечатлений</div>
+      </div>
+      <div class="def-item">
+        <div class="def-k">Ключевая выгода</div>
+        <div class="def-v">Яркие, смелые решения, реализованные с безупречным профессионализмом</div>
+      </div>
+    </div>
+
+    <div class="def-final reveal">
+      <div class="def-final-k">Определение</div>
+      <p class="def-final-t">Collab — event-агентство для корпоративно-деловой среды, создающее яркие впечатления, в основе которых лежит мастерство реализации.</p>
+    </div>
   </div>
 </section>
 
