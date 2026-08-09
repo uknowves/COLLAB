@@ -321,16 +321,19 @@ section{position:relative}
 .zone-cat .zc-k{position:relative;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:13px;opacity:.85;margin-bottom:18px}
 .zone-cat .zc-t{position:relative;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(23px,2.5vw,32px);line-height:1.18;margin-bottom:16px}
 .zone-cat .zc-d{position:relative;font-size:16px;line-height:1.5;opacity:.92;max-width:440px}
-.zone-sources{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
+.zone-sources{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column;justify-content:center;transition:background .3s ease,border-color .3s ease}
+.zone-sources:hover{background:rgba(255,94,26,.07);border-color:rgba(255,94,26,.32)}
 .zone-sources .zs-k{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.55);margin-bottom:20px;line-height:1.4}
 .zone-sources .zs-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.zone-sources .zs-item{border:1.5px solid rgba(255,255,255,.26);border-radius:100px;padding:9px 18px;font-family:var(--font-display);text-transform:uppercase;font-size:13px;font-weight:600;color:#fff}
+.zone-sources .zs-item{border:1.5px solid rgba(255,255,255,.26);border-radius:100px;padding:9px 18px;font-family:var(--font-display);text-transform:uppercase;font-size:13px;font-weight:600;color:#fff;transition:background .25s ease,border-color .25s ease}
+.zone-sources .zs-item:hover{background:rgba(255,94,26,.14);border-color:rgba(255,94,26,.55)}
 .zone-sources .zs-note{font-size:14.5px;color:rgba(255,255,255,.6);line-height:1.55}
 .zone-foot{margin-top:34px;max-width:860px;font-size:16.5px;color:rgba(255,255,255,.62);border-top:1px solid rgba(255,255,255,.14);padding-top:28px;line-height:1.62}
 
 /* ========== POSITIONING IDEA (step 02) ========== */
 .tension-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px}
-.tension{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:14px 26px}
+.tension{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:14px 26px;transition:background .25s ease,border-color .25s ease}
+.tension:hover{background:rgba(255,94,26,.08);border-color:rgba(255,94,26,.4)}
 .tension .t-a,.tension .t-b{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:14px;letter-spacing:.02em;color:#fff}
 .tension .t-vs{color:var(--orange-2);font-size:13px;font-weight:700}
 
@@ -353,7 +356,8 @@ section{position:relative}
 
 /* ========== POSITIONING DEFINITION (step 03) ========== */
 .def-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
-.def-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:32px 34px}
+.def-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:32px 34px;transition:background .3s ease,border-color .3s ease}
+.def-item:hover{background:rgba(255,94,26,.07);border-color:rgba(255,94,26,.32)}
 .def-k{font-family:var(--font-display);text-transform:uppercase;font-size:12.5px;letter-spacing:.14em;color:var(--orange-2);margin-bottom:14px}
 .def-v{font-size:18.5px;line-height:1.44;color:#fff}
 .def-final{margin-top:26px;background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-radius:var(--r);padding:48px 50px;color:#fff;position:relative;overflow:hidden;cursor:pointer}
