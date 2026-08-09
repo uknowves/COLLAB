@@ -311,20 +311,45 @@ section{position:relative}
 .flow-step .fs-d{font-size:14.5px;color:rgba(255,255,255,.62);line-height:1.5}
 .flow-arrow{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.28);font-size:20px}
 
+/* ========== dark section shade variant (alternates with .dark-sec) ========== */
+.dark-sec.alt{background:linear-gradient(180deg,#1a1918,#201d1a)}
+
 /* ========== ZONE / CATEGORY (positioning, step 01) ========== */
-.zone{background:var(--panel)}
 .zone-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:8px}
 .zone-cat{background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-radius:var(--r);padding:46px 44px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;min-height:260px}
 .zone-cat::after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent);top:-100px;right:-90px}
 .zone-cat .zc-k{position:relative;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:13px;opacity:.85;margin-bottom:18px}
 .zone-cat .zc-t{position:relative;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(23px,2.5vw,32px);line-height:1.18;margin-bottom:16px}
 .zone-cat .zc-d{position:relative;font-size:16px;line-height:1.5;opacity:.92;max-width:440px}
-.zone-sources{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
-.zone-sources .zs-k{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:13px;letter-spacing:.05em;color:var(--muted);margin-bottom:20px;line-height:1.4}
+.zone-sources{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
+.zone-sources .zs-k{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.55);margin-bottom:20px;line-height:1.4}
 .zone-sources .zs-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.zone-sources .zs-item{border:1.5px solid var(--line);border-radius:100px;padding:9px 18px;font-family:var(--font-display);text-transform:uppercase;font-size:13px;font-weight:600;color:var(--ink-soft)}
-.zone-sources .zs-note{font-size:14.5px;color:var(--muted);line-height:1.55}
-.zone-foot{margin-top:34px;max-width:860px;font-size:16.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:28px;line-height:1.62}
+.zone-sources .zs-item{border:1.5px solid rgba(255,255,255,.26);border-radius:100px;padding:9px 18px;font-family:var(--font-display);text-transform:uppercase;font-size:13px;font-weight:600;color:#fff}
+.zone-sources .zs-note{font-size:14.5px;color:rgba(255,255,255,.6);line-height:1.55}
+.zone-foot{margin-top:34px;max-width:860px;font-size:16.5px;color:rgba(255,255,255,.62);border-top:1px solid rgba(255,255,255,.14);padding-top:28px;line-height:1.62}
+
+/* ========== POSITIONING IDEA (step 02) ========== */
+.tension-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px}
+.tension{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:14px 26px}
+.tension .t-a,.tension .t-b{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:14px;letter-spacing:.02em;color:#fff}
+.tension .t-vs{color:var(--orange-2);font-size:13px;font-weight:700}
+
+.idea-quotes-wrap{margin-top:56px}
+.idea-quotes-k{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;color:rgba(255,255,255,.45);margin-bottom:18px}
+.idea-quotes{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.iq{padding:16px 0;border-top:1px solid rgba(255,255,255,.12);font-family:var(--font-serif);font-size:17.5px;color:rgba(255,255,255,.78);line-height:1.4}
+.iq::before{content:"—";color:var(--orange-2);margin-right:12px}
+
+.idea-axis{margin-top:40px;font-size:18px;color:rgba(255,255,255,.68);max-width:680px;line-height:1.62}
+.idea-simple{margin-top:14px;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(26px,3.6vw,44px);line-height:1.16;letter-spacing:-.005em}
+.idea-simple .grad-text{background:linear-gradient(100deg,var(--orange) 0%,var(--orange-2) 55%,#ffb27a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.idea-final-sec{min-height:78vh;display:flex;align-items:center}
+.idea-final-inner{text-align:center;margin:0 auto}
+.idea-final-k{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:13px;color:var(--orange-2);margin-bottom:30px}
+.idea-final{font-family:var(--font-display);text-transform:uppercase;font-weight:700;font-size:clamp(36px,7vw,94px);line-height:1.04;letter-spacing:-.01em;background:linear-gradient(100deg,#fff 0%,#ffd9bf 55%,var(--orange-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;max-width:1080px;margin:0 auto}
+.idea-final-note{margin:32px auto 0;max-width:560px;font-size:16px;color:rgba(255,255,255,.55);line-height:1.6}
+.reveal.reveal-big{transform:translateY(42px) scale(.96);transition:opacity 1.05s ease,transform 1.05s cubic-bezier(.16,.8,.24,1)}
 
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
@@ -351,6 +376,7 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .flow-row{grid-template-columns:1fr 1fr;gap:20px}
   .flow-arrow{display:none}
   .zone-grid{grid-template-columns:1fr}
+  .idea-quotes{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -483,6 +509,8 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="method-recap"><span class="lbl">Пирамида</span><span class="dt"></span></a>
   <a data-to="positioning-theory"><span class="lbl">Метод</span><span class="dt"></span></a>
   <a data-to="zone"><span class="lbl">Зона</span><span class="dt"></span></a>
+  <a data-to="idea"><span class="lbl">Идея</span><span class="dt"></span></a>
+  <a data-to="idea-final"><span class="lbl">Формула</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -896,7 +924,7 @@ html.locked body{overflow:hidden;height:100vh}
 </section>
 
 <!-- ============ ZONE / CATEGORY ============ -->
-<section class="zone sec-pad" id="zone">
+<section class="zone dark-sec alt sec-pad" id="zone">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-num">Позиционирование · Шаг 01</div>
@@ -922,6 +950,49 @@ html.locked body{overflow:hidden;height:100vh}
     </div>
 
     <p class="zone-foot reveal">Более глубокая сегментация нецелесообразна, поскольку текущий уровень детализации уже является стратегически исчерпывающим: дальнейшее дробление не меняет ни состава конкурентов, ни логики выбора клиента, ни принципов построения бренда, а лишь усложняет модель без создания дополнительной стратегической ценности.</p>
+  </div>
+</section>
+
+<!-- ============ POSITIONING IDEA ============ -->
+<section class="dark-sec sec-pad" id="idea">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Позиционирование · Шаг 02</div>
+      <h2 class="sec-title">Позиционирующая<br>идея</h2>
+      <p class="sec-sub">На этом рынке описывать бренд через продуктовые свойства или через результат не создаёт отстройки: все ярко показывают результат и обещают профессионализм, а продуктовые свойства каждый преподносит по-своему — но с рациональной точки зрения они у всех выглядят одинаково привлекательно. Значит, позиционированию нужны не рациональные, а <b>эмоционально-ценностные</b> основания.</p>
+    </div>
+
+    <div class="tension-row reveal">
+      <div class="tension"><span class="t-a">Креатив</span><span class="t-vs">×</span><span class="t-b">Процессы</span></div>
+      <div class="tension"><span class="t-a">Большой опыт</span><span class="t-vs">×</span><span class="t-b">Стремление к ярким решениям</span></div>
+    </div>
+
+    <div class="idea-quotes-wrap reveal">
+      <div class="idea-quotes-k">В данных мы увидели одну и ту же ось, сформулированную по-разному</div>
+      <div class="idea-quotes">
+        <div class="iq">Смелость делать правильно</div>
+        <div class="iq">Креативная эффективность</div>
+        <div class="iq">Красота должна работать</div>
+        <div class="iq">Эффективность не обязана быть скучной</div>
+        <div class="iq">Настоящий креатив начинается с опыта</div>
+        <div class="iq">Сильные идеи требуют сильной реализации</div>
+        <div class="iq">Чем выше мастерство, тем смелее решения</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="idea-axis">Все формулировки крутятся вокруг одной оси — соединения творческой силы и профессиональной реализации. Если говорить проще:</p>
+      <div class="idea-simple"><span class="grad-text">Яркие решения через мастерство</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POSITIONING IDEA — FINAL REVEAL ============ -->
+<section class="idea-final-sec dark-sec alt sec-pad" id="idea-final">
+  <div class="wrap idea-final-inner">
+    <div class="idea-final-k reveal">Позиционирующая идея</div>
+    <h3 class="idea-final reveal reveal-big">Мастерство превосходных впечатлений</h3>
+    <p class="idea-final-note reveal">На этой формулировке строится всё дальнейшее: определение позиционирования и метафора бренда.</p>
   </div>
 </section>
 
