@@ -311,6 +311,21 @@ section{position:relative}
 .flow-step .fs-d{font-size:14.5px;color:rgba(255,255,255,.62);line-height:1.5}
 .flow-arrow{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.28);font-size:20px}
 
+/* ========== ZONE / CATEGORY (positioning, step 01) ========== */
+.zone{background:var(--panel)}
+.zone-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:8px}
+.zone-cat{background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-radius:var(--r);padding:46px 44px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;min-height:260px}
+.zone-cat::after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent);top:-100px;right:-90px}
+.zone-cat .zc-k{position:relative;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:13px;opacity:.85;margin-bottom:18px}
+.zone-cat .zc-t{position:relative;font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(23px,2.5vw,32px);line-height:1.18;margin-bottom:16px}
+.zone-cat .zc-d{position:relative;font-size:16px;line-height:1.5;opacity:.92;max-width:440px}
+.zone-sources{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
+.zone-sources .zs-k{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:13px;letter-spacing:.05em;color:var(--muted);margin-bottom:20px;line-height:1.4}
+.zone-sources .zs-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.zone-sources .zs-item{border:1.5px solid var(--line);border-radius:100px;padding:9px 18px;font-family:var(--font-display);text-transform:uppercase;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.zone-sources .zs-note{font-size:14.5px;color:var(--muted);line-height:1.55}
+.zone-foot{margin-top:34px;max-width:860px;font-size:16.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:28px;line-height:1.62}
+
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
 .foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
@@ -335,6 +350,7 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .character{padding:34px}
   .flow-row{grid-template-columns:1fr 1fr;gap:20px}
   .flow-arrow{display:none}
+  .zone-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -466,6 +482,7 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="next"><span class="lbl">Дальше</span><span class="dt"></span></a>
   <a data-to="method-recap"><span class="lbl">Пирамида</span><span class="dt"></span></a>
   <a data-to="positioning-theory"><span class="lbl">Метод</span><span class="dt"></span></a>
+  <a data-to="zone"><span class="lbl">Зона</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -875,6 +892,36 @@ html.locked body{overflow:hidden;height:100vh}
         <div class="fs-d">Переводим определение в образ — визуальную и словесную метафору, которая делает позиционирование ощутимым.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ ZONE / CATEGORY ============ -->
+<section class="zone sec-pad" id="zone">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Позиционирование · Шаг 01</div>
+      <h2 class="sec-title">Зона конкуренции<br>и категория</h2>
+      <p class="sec-sub">Индустрия COLLAB — это индустрия мероприятий. На основе маркетингового аудита, анализа целевых сегментов и Jobs to Be Done мы определили <b>зону конкуренции</b> как рынок мероприятий для корпоративно-деловой среды.</p>
+    </div>
+
+    <div class="zone-grid reveal">
+      <div class="zone-cat">
+        <div class="zc-k">Категория</div>
+        <div class="zc-t">Рынок мероприятий для корпоративно-деловой среды</div>
+        <div class="zc-d">Здесь COLLAB конкурирует напрямую — здесь работает бренд, и на этом рынке формируется его позиционирование.</div>
+      </div>
+      <div class="zone-sources">
+        <div class="zs-k">Остальные направления — не зона конкуренции</div>
+        <div class="zs-list">
+          <div class="zs-item">Концерты</div>
+          <div class="zs-item">Fashion</div>
+          <div class="zs-item">Частные проекты</div>
+        </div>
+        <p class="zs-note">Источники экспертизы, репутации и кейсов — усиливают категорию, но не определяют её.</p>
+      </div>
+    </div>
+
+    <p class="zone-foot reveal">Более глубокая сегментация нецелесообразна, поскольку текущий уровень детализации уже является стратегически исчерпывающим: дальнейшее дробление не меняет ни состава конкурентов, ни логики выбора клиента, ни принципов построения бренда, а лишь усложняет модель без создания дополнительной стратегической ценности.</p>
   </div>
 </section>
 
