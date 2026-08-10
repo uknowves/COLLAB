@@ -409,6 +409,30 @@ section{position:relative}
 .wc-placeholder{margin-top:20px;border:1.5px dashed rgba(255,255,255,.22);border-radius:var(--r);display:flex;align-items:center;justify-content:center;min-height:110px;text-align:center;padding:20px}
 .wc-placeholder .wc-note{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:rgba(255,255,255,.4)}
 
+/* ========== METAPHOR — TRANSITION ========== */
+.meta-trans-sec{min-height:60vh;display:flex;align-items:center}
+.meta-trans-inner{text-align:center;margin:0 auto;max-width:940px}
+.meta-trans-k{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:13px;color:var(--orange-2);margin-bottom:28px}
+.meta-trans-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(26px,3.6vw,44px);line-height:1.32;letter-spacing:-.005em;background:linear-gradient(100deg,#fff 0%,#ffd9bf 55%,var(--orange-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.meta-trans-note{margin:30px auto 0;max-width:560px;font-size:16px;color:rgba(255,255,255,.55);line-height:1.6}
+
+/* ========== DESIGN TASKS ========== */
+.task-list{margin-top:12px;border-top:1px solid rgba(255,255,255,.14)}
+.task-item{display:grid;grid-template-columns:60px 1fr;gap:28px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.task-n{font-family:var(--font-display);font-weight:700;font-size:21px;color:var(--orange-2);line-height:1.2}
+.task-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:20.5px;letter-spacing:.005em;color:#fff;margin-bottom:12px;line-height:1.28}
+.task-d{font-size:16px;line-height:1.62;color:rgba(255,255,255,.6);max-width:760px}
+
+/* ========== GALLERY — JUSTIFIED ROWS ========== */
+.gallery-sec{--gal-gap:clamp(10px,2.6vw,52px);--gal-margin:calc(var(--gal-gap) * 3)}
+.gallery-outer{max-width:1760px;margin:0 auto;padding:0 var(--gal-margin)}
+.gallery-head{max-width:820px;margin:0 auto 50px}
+.gal-grid{display:flex;flex-direction:column;gap:var(--gal-gap)}
+.gal-row{display:flex;gap:var(--gal-gap)}
+.gal-row.last-row{flex-wrap:wrap}
+.gal-tile{position:relative;overflow:hidden;border-radius:10px;background:#17140f;flex:none}
+.gal-tile img,.gal-tile video{display:block;width:100%;height:100%;object-fit:cover}
+
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
 .foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
@@ -447,6 +471,8 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .acc-body-inner{padding:0 22px 22px 22px}
   .topbar .tag{display:none}
   .flow-row{grid-template-columns:1fr}
+  .task-item{grid-template-columns:1fr;gap:8px}
+  .task-n{font-size:15px}
 }
 
 /* ========== PASSWORD GATE ========== */
@@ -573,6 +599,9 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="idea-final"><span class="lbl">Формула</span><span class="dt"></span></a>
   <a data-to="definition"><span class="lbl">Определение</span><span class="dt"></span></a>
   <a data-to="wheel-intro"><span class="lbl">Колесо</span><span class="dt"></span></a>
+  <a data-to="metaphor-transition"><span class="lbl">Метафора</span><span class="dt"></span></a>
+  <a data-to="design-tasks"><span class="lbl">Задачи</span><span class="dt"></span></a>
+  <a data-to="metaphor-1"><span class="lbl">Призма</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -1216,6 +1245,90 @@ html.locked body{overflow:hidden;height:100vh}
   </div>
 </section>
 
+<!-- ============ METAPHOR — TRANSITION ============ -->
+<section class="meta-trans-sec dark-sec sec-pad" id="metaphor-transition">
+  <div class="wrap meta-trans-inner">
+    <div class="meta-trans-k reveal">Позиционирование · Шаг 05</div>
+    <h3 class="meta-trans-t reveal reveal-big">Дальше — метафора: связующее звено между данными и образами</h3>
+    <p class="meta-trans-note reveal">Она переводит бренд из плоскости описательной — с данными и стратегией — в плоскость коммуникационную: с визуальными и вербальными инструментами и коммуникацией.</p>
+  </div>
+</section>
+
+<!-- ============ DESIGN TASKS ============ -->
+<section class="dark-sec alt sec-pad" id="design-tasks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Метафора бренда</div>
+      <h2 class="sec-title">Задачи дизайна</h2>
+      <p class="sec-sub">Прежде чем переходить к образам — фиксируем принципы, которым должна соответствовать айдентика COLLAB.</p>
+    </div>
+
+    <div class="task-list reveal">
+      <div class="task-item">
+        <div class="task-n">01</div>
+        <div>
+          <div class="task-t">Айдентика должна быть яркой и эмоциональной, но взрослой</div>
+          <p class="task-d">Категория требует визуальной выразительности: бренд создаёт события, шоу, впечатления, работает с артистами и хочет усиливать fashion-направление. Поэтому слишком строгая, стерильная или «консалтинговая» айдентика будет противоречить самому продукту.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">02</div>
+        <div>
+          <div class="task-t">Не выглядеть как агентство праздников</div>
+          <p class="task-d">Несмотря на работу в event-индустрии, бренд должен восприниматься как партнёр для решения корпоративных задач.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">03</div>
+        <div>
+          <div class="task-t">Бренд должен быть понятен руководителям</div>
+          <p class="task-d">Основная аудитория — собственники, директора по маркетингу, HRD, топ-менеджеры. Поэтому дизайн должен быстро считываться и не требовать расшифровки: не стоит использовать сложные визуальные метафоры, которые понятны только креативщикам.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">04</div>
+        <div>
+          <div class="task-t">Современность важнее трендов</div>
+          <p class="task-d">Айдентика должна выглядеть актуально, но не зависеть от модных приёмов, которые устареют через год.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">05</div>
+        <div>
+          <div class="task-t">Креатив должен выглядеть управляемым</div>
+          <p class="task-d">Бренд не должен производить впечатление хаотичной творческой студии. Любое нестандартное решение должно ощущаться осознанным, выверенным и профессионально контролируемым.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">06</div>
+        <div>
+          <div class="task-t">Айдентика должна выдерживать масштаб</div>
+          <p class="task-d">Она должна одинаково хорошо работать на презентации для совета директоров, на сцене форума, в digital, в социальных сетях и в оформлении кейсов. Система должна быть гибкой, а не состоять из одного красивого логотипа.</p>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-n">07</div>
+        <div>
+          <div class="task-t">Айдентика должна отражать главную идею бренда</div>
+          <p class="task-d">В каждом носителе должно считываться соединение креативности, стиля, опыта, мастерства и системности. Если визуальная система транслирует только одну из этих граней — задача не выполнена.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METAPHOR #1 — PRISM (gallery) ============ -->
+<section class="gallery-sec dark-sec sec-pad" id="metaphor-1">
+  <div class="gallery-outer">
+    <div class="sec-head gallery-head reveal">
+      <div class="sec-num">Метафора · Концепт 01</div>
+      <h2 class="sec-title">Метафора #1 – Призма</h2>
+      <p class="sec-sub">Визуальные референсы для первого концепта метафоры.</p>
+    </div>
+    <div class="gal-grid" id="gal-prism"></div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap foot-row">
     <div class="foot-brand">STATE OF MIND<small>Платформа бренда</small></div>
@@ -1285,6 +1398,135 @@ document.querySelectorAll('.pyr-layout').forEach(layout=>{
     l.addEventListener('click',()=>setActive(l.dataset.ring));
   });
   setActive('attributes');
+})();
+
+/* ============ JUSTIFIED GALLERY (metaphor #1 — prism) ============
+   Packs mixed photo/video/gif tiles into rows of equal height, 4–6 tiles
+   per row on desktop, narrowing on smaller screens. Width of each tile is
+   derived purely from its own aspect ratio — nothing is cropped or
+   stretched, only the row height is solved for. See GALLERY_ITEMS below:
+   add/remove entries (with real w/h in pixels) to change the gallery
+   contents — the layout recalculates itself, no other code to touch. */
+(function(){
+  const GALLERY_ITEMS = [
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-01.jpg', w:1200, h:675},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-02.jpg', w:1200, h:1311},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-03.jpg', w:1200, h:1600},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-04.jpg', w:736,  h:721},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-05.jpg', w:997,  h:569},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-06.jpg', w:735,  h:539},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-07.jpg', w:720,  h:720},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-08.jpg', w:736,  h:981},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-09.jpg', w:1200, h:1200},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-10.jpg', w:661,  h:372},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-11.jpg', w:735,  h:462},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-12.jpg', w:736,  h:414},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-13.jpg', w:736,  h:1308},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-14.jpg', w:1200, h:1500},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-15.jpg', w:544,  h:795},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-16.jpg', w:569,  h:348},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-17.jpg', w:736,  h:1308},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-18.jpg', w:500,  h:500},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-19.jpg', w:600,  h:900},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-20.jpg', w:735,  h:413},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-21.jpg', w:735,  h:445},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-22.jpg', w:634,  h:644},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-23.jpg', w:473,  h:266},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-24.jpg', w:784,  h:784},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-25.jpg', w:736,  h:414},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/img-26.jpg', w:1080, h:1037},
+    {type:'image', src:'assets/gallery/metaphor-1-prism/gif-01.gif', w:500,  h:500},
+    {type:'video', src:'assets/gallery/metaphor-1-prism/vid-01.mp4', w:1058, h:578},
+    {type:'video', src:'assets/gallery/metaphor-1-prism/vid-02.mp4', w:1058, h:1022}
+  ];
+
+  const root = document.getElementById('gal-prism');
+  if(!root) return;
+
+  /* breakpoints: [minWidth, {min items, max items, target row height, max row height}] */
+  function breakpoint(w){
+    if(w >= 1000) return {min:4, max:6, target:240, maxH:300};
+    if(w >= 640)  return {min:2, max:3, target:210, maxH:270};
+    return              {min:1, max:2, target:160, maxH:220};
+  }
+
+  function buildRows(items, containerW, gap){
+    const bp = breakpoint(containerW);
+    const rows = [];
+    let i = 0;
+    while(i < items.length){
+      let n = 0, sumAR = 0, height = bp.target;
+      while(i + n < items.length && n < bp.max){
+        const ar = items[i+n].w / items[i+n].h;
+        const testN = n + 1;
+        const testSumAR = sumAR + ar;
+        const testHeight = (containerW - gap * (testN - 1)) / testSumAR;
+        n = testN; sumAR = testSumAR; height = testHeight;
+        /* stop once we've reached the target height (not the ceiling) so
+           rows actually vary between min and max items depending on how
+           narrow/wide the images in them are, instead of always stopping
+           at the minimum the moment it's technically "under the ceiling" */
+        if(n >= bp.min && (height <= bp.target || n === bp.max)) break;
+      }
+      const chunk = items.slice(i, i + n);
+      const isTrailing = (i + n >= items.length) && n < bp.min;
+      rows.push(isTrailing
+        ? {items: chunk, height: bp.target, natural: true}
+        : {items: chunk, height: Math.max(height, 60)});
+      i += n;
+    }
+    return rows;
+  }
+
+  /* mirrors the CSS clamp(10px,2.6vw,52px) on --gal-gap: custom-property
+     values containing clamp()/calc() come back unresolved as raw text from
+     getComputedStyle, so the gap used for the row-packing math is computed
+     directly here instead of parsed back out of CSS. */
+  function galGap(){
+    return Math.min(52, Math.max(10, innerWidth * 0.026));
+  }
+
+  function render(){
+    const gap = galGap();
+    const containerW = root.clientWidth;
+    if(!containerW) return;
+    const rows = buildRows(GALLERY_ITEMS, containerW, gap);
+    root.innerHTML = '';
+    rows.forEach(row=>{
+      const rowEl = document.createElement('div');
+      rowEl.className = 'gal-row' + (row.natural ? ' last-row' : '');
+      row.items.forEach(it=>{
+        const ar = it.w / it.h;
+        const tile = document.createElement('div');
+        tile.className = 'gal-tile';
+        tile.style.width = (row.height * ar) + 'px';
+        tile.style.height = row.height + 'px';
+        let media;
+        if(it.type === 'video'){
+          media = document.createElement('video');
+          media.muted = true; media.autoplay = true; media.loop = true; media.playsInline = true;
+          media.setAttribute('muted',''); media.setAttribute('playsinline','');
+          media.src = it.src;
+        } else {
+          media = document.createElement('img');
+          media.loading = 'lazy';
+          media.alt = 'COLLAB — Метафора #1, Призма';
+          media.src = it.src;
+        }
+        tile.appendChild(media);
+        rowEl.appendChild(tile);
+      });
+      root.appendChild(rowEl);
+    });
+    root.querySelectorAll('video').forEach(v=>{ v.play().catch(()=>{}); });
+  }
+
+  render();
+  let resizeT;
+  addEventListener('resize', ()=>{
+    clearTimeout(resizeT);
+    resizeT = setTimeout(render, 150);
+  }, {passive:true});
 })();
 
 /* rational accordion */
