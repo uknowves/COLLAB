@@ -371,34 +371,43 @@ section{position:relative}
 .def-final:hover .def-final-t{opacity:1}
 
 /* ========== BRAND WHEEL (step 04) ========== */
-.wheel-wrap{max-width:520px;margin:48px auto 0;position:relative}
+.wheel-hint{margin-top:10px;font-size:14.5px;color:rgba(255,255,255,.4)}
+.wheel-interactive{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;margin-top:40px}
+.wheel-col{display:flex;flex-direction:column;align-items:center}
+.wheel-wrap{max-width:460px;width:100%;margin:0 auto;position:relative}
 .wheel-svg{width:100%;height:auto;display:block}
-.wheel-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:34px}
-.wl-item{display:flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:rgba(255,255,255,.55)}
-.wl-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.wring{cursor:pointer}
+.wring .wring-fill{transition:filter .25s ease,stroke .25s ease,stroke-width .25s ease}
+.wring:hover .wring-fill,.wring.active .wring-fill{filter:brightness(1.2);stroke:#fff;stroke-width:2.5}
 
-.wheel-cards{display:flex;flex-direction:column;gap:14px;margin-top:8px}
-.wheel-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:32px 34px;transition:background .3s ease,border-color .3s ease}
-.wheel-card:hover{background:rgba(255,94,26,.06);border-color:rgba(255,94,26,.3)}
+.wheel-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:30px}
+.wl-item{display:flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:rgba(255,255,255,.55);cursor:pointer;transition:color .25s ease;padding:4px 2px}
+.wl-item:hover,.wl-item.active{color:#fff}
+.wl-dot{width:9px;height:9px;border-radius:50%;flex:none;transition:box-shadow .25s ease}
+.wl-item.active .wl-dot{box-shadow:0 0 0 4px rgba(255,138,61,.25)}
+
+.wheel-panels{position:relative;min-height:280px}
+.wpanel{display:none}
+.wpanel.active{display:block;animation:wpanelFade .4s ease}
+@keyframes wpanelFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .wc-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .wc-dot{width:10px;height:10px;border-radius:50%;flex:none}
 .wc-ring{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:rgba(255,255,255,.45)}
-.wc-title{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:22px;color:#fff}
-.wc-group{margin-top:20px}
-.wc-group:first-of-type{margin-top:18px}
+.wc-title{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:26px;color:#fff}
+.wc-group{margin-top:22px}
+.wc-group:first-of-type{margin-top:20px}
 .wc-group-k{font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:.1em;color:var(--orange-2);margin-bottom:10px}
 .wc-pills{display:flex;flex-wrap:wrap;gap:8px}
 .wc-pill{border:1.5px solid rgba(255,255,255,.22);border-radius:100px;padding:7px 15px;font-size:13.5px;color:rgba(255,255,255,.85);transition:background .25s ease,border-color .25s ease}
 .wc-pill:hover{background:rgba(255,94,26,.14);border-color:rgba(255,94,26,.55)}
-.wc-quotes{display:flex;flex-direction:column;margin-top:18px}
+.wc-quotes{display:flex;flex-direction:column;margin-top:20px}
 .wc-q{padding:13px 0;border-top:1px solid rgba(255,255,255,.12);font-family:var(--font-serif);font-size:16.5px;color:rgba(255,255,255,.8);line-height:1.4}
 .wc-q::before{content:"—";color:var(--orange-2);margin-right:12px}
 .wc-q:first-child{border-top:none;padding-top:0}
-.wheel-card.personality{background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border:none}
-.wheel-card.personality .wc-ring{color:rgba(255,255,255,.75)}
-.wheel-card.personality .wc-statement{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(19px,2vw,25px);line-height:1.35;margin-top:16px;color:#fff}
-.wheel-card.placeholder{border:1.5px dashed rgba(255,255,255,.22);background:transparent;display:flex;align-items:center;justify-content:center;min-height:110px;text-align:center}
-.wheel-card.placeholder .wc-note{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:rgba(255,255,255,.4)}
+.wc-personality-box{margin-top:20px;background:linear-gradient(158deg,#ff9048 0%,#ff5e1a 66%,#ef4a10 100%);border-radius:var(--r);padding:30px 32px}
+.wc-personality-box .wc-statement{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:clamp(19px,2vw,24px);line-height:1.35;color:#fff}
+.wc-placeholder{margin-top:20px;border:1.5px dashed rgba(255,255,255,.22);border-radius:var(--r);display:flex;align-items:center;justify-content:center;min-height:110px;text-align:center;padding:20px}
+.wc-placeholder .wc-note{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:rgba(255,255,255,.4)}
 
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
@@ -427,6 +436,7 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .zone-grid{grid-template-columns:1fr}
   .idea-quotes{grid-template-columns:1fr}
   .def-grid{grid-template-columns:1fr}
+  .wheel-interactive{grid-template-columns:1fr;gap:44px}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -437,7 +447,6 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .acc-body-inner{padding:0 22px 22px 22px}
   .topbar .tag{display:none}
   .flow-row{grid-template-columns:1fr}
-  .wheel-card{padding:26px 24px}
 }
 
 /* ========== PASSWORD GATE ========== */
@@ -564,7 +573,6 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="idea-final"><span class="lbl">Формула</span><span class="dt"></span></a>
   <a data-to="definition"><span class="lbl">Определение</span><span class="dt"></span></a>
   <a data-to="wheel-intro"><span class="lbl">Колесо</span><span class="dt"></span></a>
-  <a data-to="wheel-detail"><span class="lbl">Слои</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -1087,127 +1095,136 @@ html.locked body{overflow:hidden;height:100vh}
   </div>
 </section>
 
-<!-- ============ BRAND WHEEL — INTRO + DIAGRAM ============ -->
+<!-- ============ BRAND WHEEL — INTERACTIVE ============ -->
 <section class="dark-sec alt sec-pad" id="wheel-intro">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-num">Позиционирование · Шаг 04</div>
       <h2 class="sec-title">Колесо бренда</h2>
       <p class="sec-sub">Платформа — это то, как мы представляем архитектуру бренда: все элементы, которые мы собрали и обсудили выше. <b>Колесо бренда</b> — это то, как мы гипотетически хотим, чтобы бренд считывался потребителем: от самых поверхностных, атрибутивных слоёв взаимодействия — к осознанию бренда на уровне абстракций и чувств.</p>
+      <p class="sec-sub wheel-hint">Наведите на кольцо или подпись под ним, чтобы увидеть содержание слоя.</p>
     </div>
 
-    <div class="wheel-wrap reveal">
-      <svg class="wheel-svg" viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="300" cy="310" r="280" fill="#351a0e" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
-        <circle cx="300" cy="310" r="224" fill="#6b2c12" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
-        <circle cx="300" cy="310" r="168" fill="#a13f15" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
-        <circle cx="300" cy="310" r="112" fill="#de5c1c" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
-        <circle cx="300" cy="310" r="56" fill="#ffbd82" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+    <div class="wheel-interactive reveal">
+      <div class="wheel-col">
+        <div class="wheel-wrap">
+          <svg class="wheel-svg" viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg">
+            <g class="wring" data-ring="attributes">
+              <circle class="wring-fill" cx="300" cy="310" r="280" fill="#351a0e" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+              <path id="wlbl1" d="M79.2,182.5 A255,255 0 0 1 520.8,182.5" fill="none"/>
+              <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff" pointer-events="none"><textPath href="#wlbl1" startOffset="50%" text-anchor="middle" font-size="16" letter-spacing="2">ATTRIBUTES</textPath></text>
+              <line x1="472.4" y1="89.4" x2="600" y2="89.4" stroke="rgba(255,255,255,.22)" stroke-width="1.5" pointer-events="none"/>
+              <circle cx="472.4" cy="89.4" r="4" fill="#ff8a3d" pointer-events="none"/>
+              <circle cx="600" cy="89.4" r="4" fill="#ff8a3d" pointer-events="none"/>
+            </g>
+            <g class="wring" data-ring="benefits">
+              <circle class="wring-fill" cx="300" cy="310" r="224" fill="#6b2c12" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+              <path id="wlbl2" d="M123.3,208 A204,204 0 0 1 476.7,208" fill="none"/>
+              <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff" pointer-events="none"><textPath href="#wlbl2" startOffset="50%" text-anchor="middle" font-size="15" letter-spacing="1.8">BENEFITS</textPath></text>
+              <line x1="437.9" y1="133.5" x2="600" y2="133.5" stroke="rgba(255,255,255,.22)" stroke-width="1.5" pointer-events="none"/>
+              <circle cx="437.9" cy="133.5" r="4" fill="#ff8a3d" pointer-events="none"/>
+              <circle cx="600" cy="133.5" r="4" fill="#ff8a3d" pointer-events="none"/>
+            </g>
+            <g class="wring" data-ring="values">
+              <circle class="wring-fill" cx="300" cy="310" r="168" fill="#a13f15" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+              <path id="wlbl3" d="M168.4,234 A152,152 0 0 1 431.6,234" fill="none"/>
+              <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff" pointer-events="none"><textPath href="#wlbl3" startOffset="50%" text-anchor="middle" font-size="14" letter-spacing="1.6">VALUES</textPath></text>
+              <line x1="403.4" y1="177.6" x2="600" y2="177.6" stroke="rgba(255,255,255,.22)" stroke-width="1.5" pointer-events="none"/>
+              <circle cx="403.4" cy="177.6" r="4" fill="#ff8a3d" pointer-events="none"/>
+              <circle cx="600" cy="177.6" r="4" fill="#ff8a3d" pointer-events="none"/>
+            </g>
+            <g class="wring" data-ring="personality">
+              <circle class="wring-fill" cx="300" cy="310" r="112" fill="#de5c1c" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+              <path id="wlbl4" d="M213.4,260 A100,100 0 0 1 386.6,260" fill="none"/>
+              <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff" pointer-events="none"><textPath href="#wlbl4" startOffset="50%" text-anchor="middle" font-size="12.5" letter-spacing="1.4">PERSONALITY</textPath></text>
+              <line x1="369.0" y1="221.7" x2="600" y2="221.7" stroke="rgba(255,255,255,.22)" stroke-width="1.5" pointer-events="none"/>
+              <circle cx="369.0" cy="221.7" r="4" fill="#ff8a3d" pointer-events="none"/>
+              <circle cx="600" cy="221.7" r="4" fill="#ff8a3d" pointer-events="none"/>
+            </g>
+            <g class="wring" data-ring="essence">
+              <circle class="wring-fill" cx="300" cy="310" r="56" fill="#ffbd82" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+              <text x="300" y="314" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="600" font-size="10.5" letter-spacing="1.5" fill="#4a2712" pointer-events="none">ESSENCE</text>
+              <line x1="334.5" y1="265.9" x2="600" y2="265.9" stroke="rgba(255,255,255,.22)" stroke-width="1.5" pointer-events="none"/>
+              <circle cx="334.5" cy="265.9" r="4" fill="#ff8a3d" pointer-events="none"/>
+              <circle cx="600" cy="265.9" r="4" fill="#ff8a3d" pointer-events="none"/>
+            </g>
+          </svg>
+        </div>
 
-        <path id="wlbl1" d="M79.2,182.5 A255,255 0 0 1 520.8,182.5" fill="none"/>
-        <path id="wlbl2" d="M123.3,208 A204,204 0 0 1 476.7,208" fill="none"/>
-        <path id="wlbl3" d="M168.4,234 A152,152 0 0 1 431.6,234" fill="none"/>
-        <path id="wlbl4" d="M213.4,260 A100,100 0 0 1 386.6,260" fill="none"/>
+        <div class="wheel-legend">
+          <div class="wl-item" data-ring="attributes"><span class="wl-dot" style="background:#a5502a"></span>Атрибуты</div>
+          <div class="wl-item" data-ring="benefits"><span class="wl-dot" style="background:#c8621f"></span>Преимущества</div>
+          <div class="wl-item" data-ring="values"><span class="wl-dot" style="background:#e07022"></span>Ценности</div>
+          <div class="wl-item" data-ring="personality"><span class="wl-dot" style="background:#de5c1c"></span>Характер</div>
+          <div class="wl-item" data-ring="essence"><span class="wl-dot" style="background:#ffbd82"></span>Суть</div>
+        </div>
+      </div>
 
-        <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff"><textPath href="#wlbl1" startOffset="50%" text-anchor="middle" font-size="16" letter-spacing="2">ATTRIBUTES</textPath></text>
-        <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff"><textPath href="#wlbl2" startOffset="50%" text-anchor="middle" font-size="15" letter-spacing="1.8">BENEFITS</textPath></text>
-        <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff"><textPath href="#wlbl3" startOffset="50%" text-anchor="middle" font-size="14" letter-spacing="1.6">VALUES</textPath></text>
-        <text font-family="Oswald, sans-serif" font-weight="600" fill="#fff"><textPath href="#wlbl4" startOffset="50%" text-anchor="middle" font-size="12.5" letter-spacing="1.4">PERSONALITY</textPath></text>
-        <text x="300" y="314" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="600" font-size="10.5" letter-spacing="1.5" fill="#4a2712">ESSENCE</text>
-
-        <g stroke="rgba(255,255,255,.22)" stroke-width="1.5">
-          <line x1="472.4" y1="89.4" x2="600" y2="89.4"/>
-          <line x1="437.9" y1="133.5" x2="600" y2="133.5"/>
-          <line x1="403.4" y1="177.6" x2="600" y2="177.6"/>
-          <line x1="369.0" y1="221.7" x2="600" y2="221.7"/>
-          <line x1="334.5" y1="265.9" x2="600" y2="265.9"/>
-        </g>
-        <g fill="#ff8a3d">
-          <circle cx="472.4" cy="89.4" r="4"/>
-          <circle cx="437.9" cy="133.5" r="4"/>
-          <circle cx="403.4" cy="177.6" r="4"/>
-          <circle cx="369.0" cy="221.7" r="4"/>
-          <circle cx="334.5" cy="265.9" r="4"/>
-          <circle cx="600" cy="89.4" r="4"/>
-          <circle cx="600" cy="133.5" r="4"/>
-          <circle cx="600" cy="177.6" r="4"/>
-          <circle cx="600" cy="221.7" r="4"/>
-          <circle cx="600" cy="265.9" r="4"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="wheel-legend reveal">
-      <div class="wl-item"><span class="wl-dot" style="background:#a5502a"></span>Атрибуты</div>
-      <div class="wl-item"><span class="wl-dot" style="background:#c8621f"></span>Преимущества</div>
-      <div class="wl-item"><span class="wl-dot" style="background:#e07022"></span>Ценности</div>
-      <div class="wl-item"><span class="wl-dot" style="background:#de5c1c"></span>Характер</div>
-      <div class="wl-item"><span class="wl-dot" style="background:#ffbd82"></span>Суть</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BRAND WHEEL — LAYER BREAKDOWN ============ -->
-<section class="dark-sec sec-pad" id="wheel-detail">
-  <div class="wrap">
-    <div class="wheel-cards">
-      <div class="wheel-card reveal">
-        <div class="wc-head"><span class="wc-dot" style="background:#a5502a"></span><span class="wc-ring">Слой 01 · Attributes</span></div>
-        <div class="wc-title">Атрибуты</div>
-        <div class="wc-group">
-          <div class="wc-group-k">На поверхности</div>
-          <div class="wc-pills">
-            <span class="wc-pill">Режиссёрско-постановочная экспертиза</span>
-            <span class="wc-pill">Работа с артистами</span>
-            <span class="wc-pill">Известные артисты</span>
-            <span class="wc-pill">Опыт</span>
-            <span class="wc-pill">Большое количество кейсов</span>
-            <span class="wc-pill">Большие компании</span>
-            <span class="wc-pill">Сильные решения в кейсах</span>
+      <div class="wheel-panels">
+        <div class="wpanel active" data-ring="attributes">
+          <div class="wc-head"><span class="wc-dot" style="background:#a5502a"></span><span class="wc-ring">Слой 01 · Attributes</span></div>
+          <div class="wc-title">Атрибуты</div>
+          <div class="wc-group">
+            <div class="wc-group-k">На поверхности</div>
+            <div class="wc-pills">
+              <span class="wc-pill">Режиссёрско-постановочная экспертиза</span>
+              <span class="wc-pill">Работа с артистами</span>
+              <span class="wc-pill">Известные артисты</span>
+              <span class="wc-pill">Опыт</span>
+              <span class="wc-pill">Большое количество кейсов</span>
+              <span class="wc-pill">Большие компании</span>
+              <span class="wc-pill">Сильные решения в кейсах</span>
+            </div>
+          </div>
+          <div class="wc-group">
+            <div class="wc-group-k">Требует раскрытия</div>
+            <div class="wc-pills">
+              <span class="wc-pill">Сильный менеджмент</span>
+              <span class="wc-pill">Насмотренность</span>
+              <span class="wc-pill">Вовлечённость первых лиц</span>
+              <span class="wc-pill">Техническая компетентность</span>
+              <span class="wc-pill">Коллаборативная модель</span>
+            </div>
           </div>
         </div>
-        <div class="wc-group">
-          <div class="wc-group-k">Требует раскрытия</div>
-          <div class="wc-pills">
-            <span class="wc-pill">Сильный менеджмент</span>
-            <span class="wc-pill">Насмотренность</span>
-            <span class="wc-pill">Вовлечённость первых лиц</span>
-            <span class="wc-pill">Техническая компетентность</span>
-            <span class="wc-pill">Коллаборативная модель</span>
+
+        <div class="wpanel" data-ring="benefits">
+          <div class="wc-head"><span class="wc-dot" style="background:#c8621f"></span><span class="wc-ring">Слой 02 · Benefits</span></div>
+          <div class="wc-title">Преимущества использования</div>
+          <div class="wc-quotes">
+            <div class="wc-q">Уверенность клиента в том, что смелые идеи будут реализованы</div>
+            <div class="wc-q">Возможность мыслить смелее</div>
+            <div class="wc-q">Современный и статусный результат</div>
+            <div class="wc-q">Работа мероприятия на задачи бизнеса и бренда</div>
           </div>
         </div>
-      </div>
 
-      <div class="wheel-card reveal">
-        <div class="wc-head"><span class="wc-dot" style="background:#c8621f"></span><span class="wc-ring">Слой 02 · Benefits</span></div>
-        <div class="wc-title">Преимущества использования</div>
-        <div class="wc-quotes">
-          <div class="wc-q">Уверенность клиента в том, что смелые идеи будут реализованы</div>
-          <div class="wc-q">Возможность мыслить смелее</div>
-          <div class="wc-q">Современный и статусный результат</div>
-          <div class="wc-q">Работа мероприятия на задачи бизнеса и бренда</div>
+        <div class="wpanel" data-ring="values">
+          <div class="wc-head"><span class="wc-dot" style="background:#e07022"></span><span class="wc-ring">Слой 03 · Values</span></div>
+          <div class="wc-title">Ценности бренда</div>
+          <div class="wc-quotes">
+            <div class="wc-q">Сильные идеи требуют сильной реализации</div>
+            <div class="wc-q">Красота должна работать</div>
+            <div class="wc-q">Смелость делать правильно</div>
+            <div class="wc-q">Клиенты — партнёры</div>
+          </div>
         </div>
-      </div>
 
-      <div class="wheel-card reveal">
-        <div class="wc-head"><span class="wc-dot" style="background:#e07022"></span><span class="wc-ring">Слой 03 · Values</span></div>
-        <div class="wc-title">Ценности бренда</div>
-        <div class="wc-quotes">
-          <div class="wc-q">Сильные идеи требуют сильной реализации</div>
-          <div class="wc-q">Красота должна работать</div>
-          <div class="wc-q">Смелость делать правильно</div>
-          <div class="wc-q">Клиенты — партнёры</div>
+        <div class="wpanel" data-ring="personality">
+          <div class="wc-head"><span class="wc-dot" style="background:#de5c1c"></span><span class="wc-ring">Слой 04 · Personality</span></div>
+          <div class="wc-title">Характер бренда</div>
+          <div class="wc-personality-box">
+            <p class="wc-statement">Мудрец + Маг — способность превращать в реальность сильные идеи.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="wheel-card personality reveal">
-        <div class="wc-head"><span class="wc-dot" style="background:#fff"></span><span class="wc-ring">Слой 04 · Personality</span></div>
-        <div class="wc-title">Характер бренда</div>
-        <p class="wc-statement">Мудрец + Маг — способность превращать в реальность сильные идеи.</p>
-      </div>
-
-      <div class="wheel-card placeholder reveal">
-        <div class="wc-note">Метафора / Essence — формулировки дальше</div>
+        <div class="wpanel" data-ring="essence">
+          <div class="wc-head"><span class="wc-dot" style="background:#ffbd82"></span><span class="wc-ring">Слой 05 · Essence</span></div>
+          <div class="wc-title">Метафора / Essence</div>
+          <div class="wc-placeholder">
+            <div class="wc-note">Формулировки — в следующем блоке</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1250,6 +1267,39 @@ document.querySelectorAll('.pyr-layout').forEach(layout=>{
     l.addEventListener('click',()=>show(l));
   });
 });
+
+/* brand wheel: hover/click ring or legend item to swap content panel */
+(function(){
+  const wheel=document.getElementById('wheel-intro');
+  if(!wheel) return;
+  const rings=wheel.querySelectorAll('.wring');
+  const legendItems=wheel.querySelectorAll('.wl-item');
+  const panels=wheel.querySelectorAll('.wpanel');
+  function setActive(name){
+    rings.forEach(r=>r.classList.toggle('active',r.dataset.ring===name));
+    legendItems.forEach(l=>l.classList.toggle('active',l.dataset.ring===name));
+    panels.forEach(p=>{
+      if(p.dataset.ring===name){
+        if(!p.classList.contains('active')){
+          p.classList.remove('active');
+          void p.offsetWidth;
+          p.classList.add('active');
+        }
+      } else {
+        p.classList.remove('active');
+      }
+    });
+  }
+  rings.forEach(r=>{
+    r.addEventListener('mouseenter',()=>setActive(r.dataset.ring));
+    r.addEventListener('click',()=>setActive(r.dataset.ring));
+  });
+  legendItems.forEach(l=>{
+    l.addEventListener('mouseenter',()=>setActive(l.dataset.ring));
+    l.addEventListener('click',()=>setActive(l.dataset.ring));
+  });
+  setActive('attributes');
+})();
 
 /* rational accordion */
 document.querySelectorAll('.acc').forEach(acc=>{
