@@ -444,6 +444,25 @@ section{position:relative}
 .gal-tile:hover{transform:scale(1.05);z-index:2}
 .gal-tile img,.gal-tile video{display:block;width:100%;height:100%;object-fit:cover}
 
+/* ========== LIGHTBOX ========== */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,.2);z-index:9999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease}
+.lightbox-overlay.open{display:flex;opacity:1}
+.lightbox-stage{position:relative;display:flex;align-items:center;justify-content:center;max-width:70vw;max-height:70vh}
+.lightbox-stage img,.lightbox-stage video{display:block;max-width:70vw;max-height:70vh;width:auto;height:auto;border-radius:10px;box-shadow:0 40px 100px rgba(0,0,0,.4);object-fit:contain;background:#000}
+.lightbox-close{position:fixed;top:28px;right:32px;width:46px;height:46px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;line-height:1;color:var(--ink);z-index:10000;transition:transform .2s ease}
+.lightbox-close:hover{transform:scale(1.08)}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;line-height:1;color:var(--ink);z-index:10000;transition:transform .2s ease}
+.lightbox-nav:hover{transform:translateY(-50%) scale(1.08)}
+.lightbox-nav.prev{left:32px}
+.lightbox-nav.next{right:32px}
+@media(max-width:760px){
+  .lightbox-stage,.lightbox-stage img,.lightbox-stage video{max-width:92vw;max-height:78vh}
+  .lightbox-close{top:16px;right:16px;width:38px;height:38px;font-size:19px}
+  .lightbox-nav{width:42px;height:42px;font-size:19px}
+  .lightbox-nav.prev{left:10px}
+  .lightbox-nav.next{right:10px}
+}
+
 /* ========== FOOTER ========== */
 footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rgba(255,255,255,.08)}
 .foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
@@ -1289,12 +1308,12 @@ html.locked body{overflow:hidden;height:100vh}
     <div class="task-grid reveal">
       <div class="task-card">
         <div class="task-n">01</div>
-        <div class="task-t">Айдентика должна быть яркой и эмоциональной, но взрослой</div>
+        <div class="task-t">Айдентика должна уметь быть яркой</div>
         <p class="task-d">Категория требует визуальной выразительности: бренд создаёт события, шоу, впечатления, работает с артистами и хочет усиливать fashion-направление. Поэтому слишком строгая, стерильная или «консалтинговая» айдентика будет противоречить самому продукту.</p>
       </div>
       <div class="task-card">
         <div class="task-n">02</div>
-        <div class="task-t">Не выглядеть как агентство праздников</div>
+        <div class="task-t">Дизайн должен уметь быть корпоративным</div>
         <p class="task-d">Несмотря на работу в event-индустрии, бренд должен восприниматься как партнёр для решения корпоративных задач.</p>
       </div>
       <div class="task-card">
@@ -1321,6 +1340,11 @@ html.locked body{overflow:hidden;height:100vh}
         <div class="task-n">07</div>
         <div class="task-t">Айдентика должна отражать главную идею бренда</div>
         <p class="task-d">В каждом носителе должно считываться соединение креативности, стиля, опыта, мастерства и системности. Если визуальная система транслирует только одну из этих граней — задача не выполнена.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-n">08</div>
+        <div class="task-t">Дизайн должен уметь быть фоновым</div>
+        <p class="task-d">Бренд должен демонстрировать разные проекты, на которых бывает разный визуал. Айдентика должна уметь быть нейтральной и фоновой.</p>
       </div>
     </div>
   </div>
@@ -1429,6 +1453,75 @@ document.querySelectorAll('.pyr-layout').forEach(layout=>{
    call it once per gallery with the root element id and an items array
    (real w/h in pixels) — add/remove entries there to change contents, the
    layout recalculates itself, no other code to touch. */
+/* ============ LIGHTBOX (shared across all galleries) ============ */
+const openLightbox = (function(){
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.innerHTML =
+    '<button class="lightbox-close" aria-label="Закрыть">&times;</button>' +
+    '<button class="lightbox-nav prev" aria-label="Предыдущее">&#8249;</button>' +
+    '<div class="lightbox-stage"></div>' +
+    '<button class="lightbox-nav next" aria-label="Следующее">&#8250;</button>';
+  document.body.appendChild(overlay);
+
+  const stage = overlay.querySelector('.lightbox-stage');
+  const btnClose = overlay.querySelector('.lightbox-close');
+  const btnPrev = overlay.querySelector('.lightbox-nav.prev');
+  const btnNext = overlay.querySelector('.lightbox-nav.next');
+
+  let items = [], idx = 0;
+
+  function renderStage(){
+    stage.innerHTML = '';
+    const it = items[idx];
+    if(!it) return;
+    let media;
+    if(it.type === 'video'){
+      media = document.createElement('video');
+      media.src = it.src;
+      media.controls = true;
+      media.autoplay = true;
+      media.muted = true;
+      media.loop = true;
+      media.playsInline = true;
+    } else {
+      media = document.createElement('img');
+      media.src = it.src;
+      media.alt = 'COLLAB — референс метафоры бренда';
+    }
+    stage.appendChild(media);
+    const showNav = items.length > 1;
+    btnPrev.style.display = showNav ? 'flex' : 'none';
+    btnNext.style.display = showNav ? 'flex' : 'none';
+  }
+
+  function close(){
+    overlay.classList.remove('open');
+    stage.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  function next(){ idx = (idx + 1) % items.length; renderStage(); }
+  function prev(){ idx = (idx - 1 + items.length) % items.length; renderStage(); }
+
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', (e)=>{ e.stopPropagation(); next(); });
+  btnPrev.addEventListener('click', (e)=>{ e.stopPropagation(); prev(); });
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) close(); });
+  document.addEventListener('keydown', (e)=>{
+    if(!overlay.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowRight') next();
+    else if(e.key === 'ArrowLeft') prev();
+  });
+
+  return function open(list, startIdx){
+    items = list; idx = startIdx;
+    renderStage();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+})();
+
 function initGallery(rootId, items){
   const root = document.getElementById(rootId);
   if(!root) return;
@@ -1482,6 +1575,7 @@ function initGallery(rootId, items){
     if(!containerW) return;
     const rows = buildRows(items, containerW, gap);
     root.innerHTML = '';
+    let globalIdx = 0;
     rows.forEach(row=>{
       const rowEl = document.createElement('div');
       rowEl.className = 'gal-row' + (row.natural ? ' last-row' : '');
@@ -1504,6 +1598,8 @@ function initGallery(rootId, items){
           media.src = it.src;
         }
         tile.appendChild(media);
+        const openIdx = globalIdx++;
+        tile.addEventListener('click', ()=> openLightbox(items, openIdx));
         rowEl.appendChild(tile);
       });
       root.appendChild(rowEl);
@@ -1521,26 +1617,33 @@ function initGallery(rootId, items){
 
 initGallery('gal-prism', [
   {type:'image', src:'assets/gallery/metaphor-1-prism/img-01.jpg', w:1200, h:1311},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-02.jpg', w:1200, h:1600},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-03.jpg', w:736,  h:721},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-04.jpg', w:1200, h:675},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-05.jpg', w:735,  h:539},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-06.jpg', w:736,  h:981},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-07.jpg', w:1200, h:1200},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-08.jpg', w:735,  h:462},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-09.jpg', w:736,  h:414},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-10.jpg', w:736,  h:1308},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-11.jpg', w:1200, h:1500},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-12.jpg', w:544,  h:795},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-13.jpg', w:569,  h:348},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-14.jpg', w:736,  h:1308},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-15.jpg', w:500,  h:500},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-16.jpg', w:600,  h:900},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-17.jpg', w:735,  h:413},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-18.jpg', w:735,  h:445},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-19.jpg', w:634,  h:644},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-20.jpg', w:736,  h:414},
-  {type:'image', src:'assets/gallery/metaphor-1-prism/img-21.jpg', w:1080, h:1037},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-02.jpg', w:562,  h:316},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-03.jpg', w:735,  h:596},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-04.jpg', w:1200, h:1600},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-05.jpg', w:736,  h:721},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-06.jpg', w:1000, h:562},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-07.jpg', w:736,  h:743},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-08.jpg', w:1183, h:841},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-09.jpg', w:1200, h:675},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-10.jpg', w:735,  h:539},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-11.jpg', w:800,  h:600},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-12.jpg', w:736,  h:981},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-13.jpg', w:1200, h:1200},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-14.jpg', w:735,  h:462},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-15.jpg', w:736,  h:414},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-16.jpg', w:736,  h:1308},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-17.jpg', w:1200, h:1500},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-18.jpg', w:544,  h:795},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-19.jpg', w:569,  h:348},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-20.jpg', w:736,  h:1308},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-21.jpg', w:500,  h:500},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-22.jpg', w:600,  h:900},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-23.jpg', w:735,  h:413},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-24.jpg', w:735,  h:445},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-25.jpg', w:634,  h:644},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-26.jpg', w:736,  h:414},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-27.jpg', w:750,  h:928},
+  {type:'image', src:'assets/gallery/metaphor-1-prism/img-28.jpg', w:1080, h:1037},
   {type:'image', src:'assets/gallery/metaphor-1-prism/gif-01.gif', w:500,  h:500},
   {type:'video', src:'assets/gallery/metaphor-1-prism/vid-01.mp4', w:918,  h:762}
 ]);
@@ -1559,16 +1662,19 @@ initGallery('gal-prism-2', [
   {type:'image', src:'assets/gallery/metaphor-2-prism/img-11.jpg', w:626,  h:350},
   {type:'image', src:'assets/gallery/metaphor-2-prism/img-12.jpg', w:1080, h:1443},
   {type:'image', src:'assets/gallery/metaphor-2-prism/img-13.jpg', w:661,  h:372},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-14.jpg', w:337,  h:600},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-15.jpg', w:1000, h:1000},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-16.jpg', w:1000, h:665},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-17.jpg', w:474,  h:473},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-18.jpg', w:1200, h:675},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-19.jpg', w:1200, h:675},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-20.jpg', w:1200, h:600},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-21.jpg', w:500,  h:500},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-22.jpg', w:784,  h:784},
-  {type:'image', src:'assets/gallery/metaphor-2-prism/img-23.jpg', w:1200, h:1503},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-14.jpg', w:736,  h:414},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-15.jpg', w:337,  h:600},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-16.jpg', w:1000, h:1000},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-17.jpg', w:544,  h:680},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-18.jpg', w:736,  h:1308},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-19.jpg', w:1000, h:665},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-20.jpg', w:474,  h:473},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-21.jpg', w:1200, h:675},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-22.jpg', w:1200, h:675},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-23.jpg', w:1200, h:600},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-24.jpg', w:500,  h:500},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-25.jpg', w:784,  h:784},
+  {type:'image', src:'assets/gallery/metaphor-2-prism/img-26.jpg', w:1200, h:1503},
   {type:'video', src:'assets/gallery/metaphor-2-prism/vid-01.mp4', w:720,  h:960},
   {type:'video', src:'assets/gallery/metaphor-2-prism/vid-02.mp4', w:720,  h:960},
   {type:'video', src:'assets/gallery/metaphor-2-prism/vid-03.mp4', w:720,  h:960},
