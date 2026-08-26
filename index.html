@@ -441,6 +441,13 @@ section{position:relative}
 .meta-points li{position:relative;padding-left:22px;font-size:15.5px;line-height:1.56;color:var(--muted)}
 .meta-points li::before{content:'—';position:absolute;left:0;top:0;color:var(--orange)}
 .gal-grid{display:flex;flex-direction:column;gap:var(--gal-gap)}
+
+.gal-subsec{margin-top:72px}
+.gal-subsec:first-of-type{margin-top:0}
+.gal-subhead{display:flex;align-items:baseline;gap:16px;margin-bottom:26px}
+.gal-subhead .gal-subnum{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.02em;color:var(--orange);flex:none}
+.gal-subhead h3{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:clamp(19px,2.1vw,26px);line-height:1.05;letter-spacing:-0.01em;color:var(--ink)}
+.dark-sec .gal-subhead h3{color:#fff}
 .gal-row{display:flex;gap:var(--gal-gap)}
 .gal-row.last-row{flex-wrap:wrap}
 .gal-tile{position:relative;overflow:hidden;border-radius:10px;background:var(--panel-2);flex:none;transform:scale(1);transition:transform .45s cubic-bezier(.22,.68,0,1);cursor:pointer}
@@ -1422,7 +1429,26 @@ html.locked body{overflow:hidden;height:100vh}
         <li>Не наивная простота, а магия управления ожиданиями</li>
       </ul>
     </div>
-    <div class="gal-grid" id="gal-curiosity"></div>
+    <div class="gal-subsec">
+      <div class="gal-subhead"><span class="gal-subnum">01</span><h3>Цвет</h3></div>
+      <div class="gal-grid" id="gal-curiosity-color"></div>
+    </div>
+    <div class="gal-subsec">
+      <div class="gal-subhead"><span class="gal-subnum">02</span><h3>Работа с изображениями</h3></div>
+      <div class="gal-grid" id="gal-curiosity-images"></div>
+    </div>
+    <div class="gal-subsec">
+      <div class="gal-subhead"><span class="gal-subnum">03</span><h3>Форма</h3></div>
+      <div class="gal-grid" id="gal-curiosity-form"></div>
+    </div>
+    <div class="gal-subsec">
+      <div class="gal-subhead"><span class="gal-subnum">04</span><h3>Цифра</h3></div>
+      <div class="gal-grid" id="gal-curiosity-digit"></div>
+    </div>
+    <div class="gal-subsec">
+      <div class="gal-subhead"><span class="gal-subnum">05</span><h3>Знак и шрифт</h3></div>
+      <div class="gal-grid" id="gal-curiosity-signfont"></div>
+    </div>
   </div>
 </section>
 
@@ -1754,35 +1780,46 @@ initGallery('gal-pulse', [
   {type:'video', src:'assets/gallery/metaphor-3-pulse/vid-03.mp4', w:720,  h:900}
 ]);
 
-initGallery('gal-curiosity', [
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-01.jpg', w:750,  h:935},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-02.jpg', w:600,  h:776},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-03.jpg', w:1170, h:1756},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-04.jpg', w:1080, h:1080},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-05.jpg', w:750,  h:1060},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-06.jpg', w:563,  h:567},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-07.jpg', w:499,  h:413},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-08.jpg', w:678,  h:1200},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-09.jpg', w:675,  h:1200},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-10.jpg', w:748,  h:743},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-11.jpg', w:750,  h:1125},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-12.jpg', w:736,  h:736},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-13.jpg', w:1000, h:666},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-14.jpg', w:735,  h:917},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-15.jpg', w:602,  h:604},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-16.jpg', w:640,  h:640},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-17.jpg', w:452,  h:552},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-18.jpg', w:1200, h:1800},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-19.jpg', w:736,  h:920},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-20.jpg', w:924,  h:1200},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-21.jpg', w:736,  h:736},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-22.jpg', w:1000, h:1333},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-23.jpg', w:1200, h:1500},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-24.jpg', w:735,  h:525},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-25.jpg', w:1200, h:2104},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-26.jpg', w:1200, h:1200},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-27.jpg', w:736,  h:920},
-  {type:'image', src:'assets/gallery/metaphor-4-curiosity/img-28.jpg', w:387,  h:516}
+initGallery('gal-curiosity-color', [
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-01.jpg', w:1080, h:1440},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-02.jpg', w:736,  h:1103},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-03.jpg', w:1080, h:1440},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-04.jpg', w:736,  h:920},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-05.jpg', w:499,  h:413},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-06.jpg', w:675,  h:1200},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-07.jpg', w:736,  h:736},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-08.jpg', w:1000, h:666},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-09.jpg', w:1200, h:1800},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/01-color/img-10.jpg', w:736,  h:913}
+]);
+
+initGallery('gal-curiosity-images', [
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-01.jpg', w:1080, h:1350},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-02.jpg', w:640,  h:640},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-03.jpg', w:1198, h:1200},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-04.jpg', w:736,  h:854},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-05.jpg', w:1200, h:1200},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-06.jpg', w:736,  h:920},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/02-images/img-07.jpg', w:1200, h:1500}
+]);
+
+initGallery('gal-curiosity-form', [
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/03-form/img-01.jpg', w:1200, h:1597},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/03-form/img-02.jpg', w:1200, h:1200}
+]);
+
+initGallery('gal-curiosity-digit', [
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/04-digit/gif-01.gif', w:1090, h:614},
+  {type:'video', src:'assets/gallery/metaphor-4-curiosity/04-digit/vid-01.mp4', w:720,  h:900},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/04-digit/gif-02.gif', w:600,  h:400}
+]);
+
+initGallery('gal-curiosity-signfont', [
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/05-sign-font/img-01.jpg', w:736,  h:1104},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/05-sign-font/img-02.jpg', w:1200, h:1500},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/05-sign-font/img-03.jpg', w:1200, h:900},
+  {type:'image', src:'assets/gallery/metaphor-4-curiosity/05-sign-font/img-04.jpg', w:1200, h:1799},
+  {type:'video', src:'assets/gallery/metaphor-4-curiosity/05-sign-font/vid-01.mp4', w:720,  h:900}
 ]);
 
 /* rational accordion */
