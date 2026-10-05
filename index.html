@@ -449,6 +449,26 @@ section{position:relative}
 .gal-subhead .gal-subnum{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.02em;color:var(--orange);flex:none}
 .gal-subhead h3{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:clamp(19px,2.1vw,26px);line-height:1.05;letter-spacing:-0.01em;color:var(--ink)}
 .dark-sec .gal-subhead h3{color:#fff}
+
+/* ========== METAPHOR DECISION / NAMING ========== */
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.thesis-item{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;transition:background .3s ease,border-color .3s ease}
+.thesis-item:hover{background:rgba(255,94,26,.05);border-color:rgba(255,94,26,.35)}
+.thesis-k{font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:.14em;color:var(--orange);margin-bottom:10px}
+.thesis-v{font-size:16.5px;line-height:1.5;color:var(--ink)}
+
+.name-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+.name-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 32px;transition:background .3s ease,border-color .3s ease}
+.name-card:hover{background:rgba(255,94,26,.05);border-color:rgba(255,94,26,.35)}
+.name-card.featured{grid-column:1/-1;border-color:rgba(255,94,26,.4)}
+.name-tag{display:inline-block;margin-bottom:14px;font-family:var(--font-display);text-transform:uppercase;font-size:11px;letter-spacing:.12em;color:#fff;background:var(--orange);padding:5px 12px;border-radius:999px}
+.name-word{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:28px;letter-spacing:.02em;color:var(--ink);margin-bottom:16px}
+.name-d{font-size:15px;line-height:1.58;color:var(--muted);margin:0 0 10px}
+.name-d b{color:var(--ink)}
+.name-x{font-size:13.5px;line-height:1.52;color:var(--muted);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.name-x a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,94,26,.35)}
+.name-x a:hover{border-color:var(--orange)}
+
 .gal-row{display:flex;gap:var(--gal-gap)}
 .gal-row.last-row{flex-wrap:wrap}
 .gal-tile{position:relative;overflow:hidden;border-radius:10px;background:var(--panel-2);flex:none;transform:scale(1);transition:transform .45s cubic-bezier(.22,.68,0,1);cursor:pointer}
@@ -503,6 +523,9 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .def-grid{grid-template-columns:1fr}
   .wheel-interactive{grid-template-columns:1fr;gap:44px}
   .task-grid{grid-template-columns:1fr}
+  .thesis-grid{grid-template-columns:1fr}
+  .name-grid{grid-template-columns:1fr}
+  .name-card.featured{grid-column:auto}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -646,6 +669,8 @@ html.locked body{overflow:hidden;height:100vh}
   <a data-to="metaphor-2"><span class="lbl">Призма 2</span><span class="dt"></span></a>
   <a data-to="metaphor-3"><span class="lbl">Пульс</span><span class="dt"></span></a>
   <a data-to="metaphor-4"><span class="lbl">Любопытство</span><span class="dt"></span></a>
+  <a data-to="metaphor-decision"><span class="lbl">Решение</span><span class="dt"></span></a>
+  <a data-to="naming"><span class="lbl">Нейминг</span><span class="dt"></span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -1449,6 +1474,87 @@ html.locked body{overflow:hidden;height:100vh}
     <div class="gal-subsec">
       <div class="gal-subhead"><span class="gal-subnum">05</span><h3>Знак и шрифт</h3></div>
       <div class="gal-grid" id="gal-curiosity-signfont"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METAPHOR DECISION — THESIS RECAP ============ -->
+<section class="sec-pad" id="metaphor-decision">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Метафора · Итог</div>
+      <h2 class="sec-title">Выбрана метафора<br><span class="grad-text">«Любопытство»</span></h2>
+      <p class="sec-sub">Из четырёх метафор для дальнейшей работы над айдентикой принята <b>метафора #4 — Любопытство</b>. Она лучше остальных реализует позиционирующую идею «Яркие впечатления через мастерство» и даёт дизайну больше свободы — непредсказуемость цвета и формы, стиль модерн, близость к фэшн и арту — без потери профессиональной собранности бренда.</p>
+    </div>
+
+    <p class="sec-sub reveal">Дальше — тезисы-рамка: то, что уже зафиксировано платформой и метафорой и будет определять все следующие решения, включая нейминг.</p>
+
+    <div class="thesis-grid reveal">
+      <div class="thesis-item"><div class="thesis-k">Аудитория</div><div class="thesis-v">Компании корпоративно-деловой среды</div></div>
+      <div class="thesis-item"><div class="thesis-k">Категория</div><div class="thesis-v">Event-рынок для корпоративно-деловой среды</div></div>
+      <div class="thesis-item"><div class="thesis-k">Позиционирующая идея</div><div class="thesis-v">Яркие впечатления через мастерство</div></div>
+      <div class="thesis-item"><div class="thesis-k">Ключевая выгода</div><div class="thesis-v">Яркие, смелые решения, реализованные с безупречным профессионализмом</div></div>
+      <div class="thesis-item"><div class="thesis-k">Архетип</div><div class="thesis-v">Мудрец + Маг — сильные идеи, превращённые в реальность</div></div>
+      <div class="thesis-item"><div class="thesis-k">Ценности бренда</div><div class="thesis-v">Сильные идеи требуют сильной реализации · Красота должна работать · Смелость делать правильно · Клиенты — партнёры</div></div>
+    </div>
+
+    <p class="sec-sub reveal" style="margin-top:56px;margin-bottom:0">И из самой метафоры «Любопытство»:</p>
+    <ul class="meta-points reveal">
+      <li>Любопытство зайти в смелое и скиллы довести это до конца</li>
+      <li>Стиль модерн и внезапные решения</li>
+      <li>Непредсказуемость в цвете и форме</li>
+      <li>Близость к фэшн и арту</li>
+      <li>Не наивная простота, а магия управления ожиданиями</li>
+    </ul>
+
+    <p class="sec-sub reveal" style="margin-top:40px;color:var(--ink);font-weight:500">Это рамка, в которой дальше принимаются все решения — в том числе нейминг.</p>
+  </div>
+</section>
+
+<!-- ============ NAMING — SHORTLIST ============ -->
+<section class="sec-pad" id="naming" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">Нейминг · Шортлист</div>
+      <h2 class="sec-title">Шортлист имени бренда</h2>
+      <p class="sec-sub">Пять лучших вариантов из обсуждённых. Каждый проверен на соответствие платформе и метафоре, звучание для аудитории и пересечения на рынке.</p>
+    </div>
+
+    <div class="name-grid reveal">
+      <div class="name-card">
+        <div class="name-word">UNSEEN</div>
+        <p class="name-d"><b>Плюсы.</b> Классное английское слово, красивое звучание и поэтический смысл — хорошо попадает в платформу.</p>
+        <p class="name-d"><b>Риск.</b> Может сложно читаться для русского глаза.</p>
+        <p class="name-x"><b>Пересечения.</b> <a href="https://unseenprod.com/" target="_blank" rel="noopener">unseenprod.com</a> — продакшн-компания; не организатор мероприятий, делает «креатив и моушн-дизайн для рекламы и мероприятий».</p>
+      </div>
+
+      <div class="name-card">
+        <div class="name-word">ELSE</div>
+        <p class="name-d"><b>Плюсы.</b> Все преимущества UNSEEN — плюс заметно более знакомое и легче читается русскоязычной аудиторией.</p>
+        <p class="name-x"><b>Пересечения.</b> <a href="https://elseproduction.ru/" target="_blank" rel="noopener">elseproduction.ru</a> — агентство; <a href="https://elseagency.ru/" target="_blank" rel="noopener">elseagency.ru</a> — смежная индустрия (исследования и маркетинговый консалтинг).</p>
+      </div>
+
+      <div class="name-card">
+        <div class="name-word">GOSH</div>
+        <p class="name-d"><b>Плюсы.</b> Восклицание и эмоция, отлично попадает в платформу, описывает результат.</p>
+        <p class="name-d"><b>Риск.</b> Может быть незнакомо части нынешних клиентов.</p>
+        <p class="name-x"><b>Пересечения.</b> Крупных, известных на всю страну event-агентств с названием «Gosh Event» в России не найдено.</p>
+      </div>
+
+      <div class="name-card">
+        <div class="name-word">OGO</div>
+        <p class="name-d"><b>Плюсы.</b> Все плюсы GOSH, но ещё более чистая эмоция — отлично работает на метафору и придаёт бренду более эмоциональный окрас, уводя от «супер-экспертности».</p>
+        <p class="name-x"><b>Пересечения.</b> <a href="https://twiga.ru/oggi" target="_blank" rel="noopener">twiga.ru/oggi</a> — созвучное агентство; <a href="https://ohmygodevent.com/" target="_blank" rel="noopener">ohmygodevent.com</a> — похожее по смыслу агентство, прямой конкурент.</p>
+      </div>
+
+      <div class="name-card featured">
+        <span class="name-tag">Нравится больше всех</span>
+        <div class="name-word">STUN</div>
+        <p class="name-d"><b>Идея.</b> Зеркальная анаграмма — оба слова читаются как разговорные восклицания и описывают что-то очень крутое.</p>
+        <p class="name-d"><b>Риск.</b> Оба слова разговорные — если человек не слушает регулярно разговорный английский, игра слов может быть неочевидна.</p>
+        <p class="name-d"><b>Почему нравится.</b> Выражает неочевидные решения, которые не лежат на поверхности, эстетичность и умение играть со смыслами — а если отсылка не считывается, это просто крутое слово, которое хорошо читается и запоминается.</p>
+        <p class="name-x"><b>Пересечения.</b> Прямого пересечения не найдено; есть созвучия (SUN и близкие по звучанию слова).</p>
+      </div>
     </div>
   </div>
 </section>
