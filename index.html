@@ -457,17 +457,28 @@ section{position:relative}
 .thesis-k{font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:.14em;color:var(--orange);margin-bottom:10px}
 .thesis-v{font-size:16.5px;line-height:1.5;color:var(--ink)}
 
-.name-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
-.name-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 32px;transition:background .3s ease,border-color .3s ease}
-.name-card:hover{background:rgba(255,94,26,.05);border-color:rgba(255,94,26,.35)}
-.name-card.featured{grid-column:1/-1;border-color:rgba(255,94,26,.4)}
+.dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.dir-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 30px}
+.dir-n{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--orange);margin-bottom:12px}
+.dir-t{font-family:var(--font-display);text-transform:uppercase;font-weight:600;font-size:17px;letter-spacing:.005em;color:var(--ink);margin-bottom:10px;line-height:1.22}
+.dir-d{font-size:14.5px;line-height:1.56;color:var(--muted)}
+
+.name-list{margin-top:56px;border-top:1px solid var(--line)}
+.name-row{display:grid;grid-template-columns:300px 1fr;gap:48px;padding:46px 0;border-bottom:1px solid var(--line)}
+.name-row.featured{background:rgba(255,94,26,.045);margin:0 -32px;padding:46px 32px;border-radius:var(--r);border-bottom:none}
+.name-row.featured + .name-row{border-top:none}
+.name-row.featured + .name-row.featured{margin-top:20px}
+.name-row-head{position:sticky;top:120px;align-self:start}
 .name-tag{display:inline-block;margin-bottom:14px;font-family:var(--font-display);text-transform:uppercase;font-size:11px;letter-spacing:.12em;color:#fff;background:var(--orange);padding:5px 12px;border-radius:999px}
-.name-word{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:28px;letter-spacing:.02em;color:var(--ink);margin-bottom:16px}
-.name-d{font-size:15px;line-height:1.58;color:var(--muted);margin:0 0 10px}
-.name-d b{color:var(--ink)}
-.name-x{font-size:13.5px;line-height:1.52;color:var(--muted);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line)}
-.name-x a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,94,26,.35)}
-.name-x a:hover{border-color:var(--orange)}
+.name-row-tag{font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:.1em;color:var(--orange);margin-bottom:14px}
+.name-word-big{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(36px,4vw,52px);letter-spacing:.01em;line-height:1;color:var(--ink)}
+.name-row-body{padding-top:6px}
+.name-p{font-size:16.5px;line-height:1.62;color:var(--muted);margin:0 0 14px}
+.name-p:last-child{margin-bottom:0}
+.name-p b{color:var(--ink)}
+.name-p.name-link-line{margin-top:22px;padding-top:22px;border-top:1px dashed var(--line);font-size:14.5px}
+.name-p.name-link-line a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,94,26,.35)}
+.name-p.name-link-line a:hover{border-color:var(--orange)}
 
 .gal-row{display:flex;gap:var(--gal-gap)}
 .gal-row.last-row{flex-wrap:wrap}
@@ -524,8 +535,11 @@ footer{background:#0d0d0f;color:#fff;padding:60px 0 44px;border-top:1px solid rg
   .wheel-interactive{grid-template-columns:1fr;gap:44px}
   .task-grid{grid-template-columns:1fr}
   .thesis-grid{grid-template-columns:1fr}
-  .name-grid{grid-template-columns:1fr}
-  .name-card.featured{grid-column:auto}
+  .dir-grid{grid-template-columns:1fr}
+  .name-row{grid-template-columns:1fr;gap:20px}
+  .name-row-head{position:static}
+  .name-row.featured{margin:0;padding:38px 24px}
+  .name-row.featured + .name-row.featured{margin-top:20px}
 }
 @media(max-width:600px){
   body{font-size:16.5px}
@@ -1520,40 +1534,86 @@ html.locked body{overflow:hidden;height:100vh}
       <p class="sec-sub">Пять лучших вариантов из обсуждённых. Каждый проверен на соответствие платформе и метафоре, звучание для аудитории и пересечения на рынке.</p>
     </div>
 
-    <div class="name-grid reveal">
-      <div class="name-card">
-        <div class="name-word">UNSEEN</div>
-        <p class="name-d"><b>Плюсы.</b> Классное английское слово, красивое звучание и поэтический смысл — хорошо попадает в платформу.</p>
-        <p class="name-d"><b>Риск.</b> Может сложно читаться для русского глаза.</p>
-        <p class="name-x"><b>Пересечения.</b> <a href="https://unseenprod.com/" target="_blank" rel="noopener">unseenprod.com</a> — продакшн-компания; не организатор мероприятий, делает «креатив и моушн-дизайн для рекламы и мероприятий».</p>
+    <p class="sec-sub reveal" style="margin-top:0">Внутри шортлиста — три направления поиска:</p>
+
+    <div class="dir-grid reveal">
+      <div class="dir-card">
+        <div class="dir-n">01</div>
+        <div class="dir-t">Классное звучание</div>
+        <p class="dir-d">Англицизмы и привычные слова с красивым английским звучанием — но такие, что остаются понятными большей части целевой аудитории.</p>
+      </div>
+      <div class="dir-card">
+        <div class="dir-n">02</div>
+        <div class="dir-t">Слово-эмоция</div>
+        <p class="dir-d">Слова, которые сами по себе — эмоция: выражают реакцию, восхищение, неподдельный восторг.</p>
+      </div>
+      <div class="dir-card">
+        <div class="dir-n">03</div>
+        <div class="dir-t">Неожиданный приём</div>
+        <p class="dir-d">Поиск интересного принципа в самом слове — доказательство того, что даже в работе с неймингом мы умеем находить нестандартные, профессиональные решения и смотреть неожиданно на всё, включая собственное имя.</p>
+      </div>
+    </div>
+
+    <div class="name-list reveal">
+      <div class="name-row">
+        <div class="name-row-head">
+          <div class="name-row-tag">Направление 01 · Классное звучание</div>
+          <div class="name-word-big">UNSEEN</div>
+        </div>
+        <div class="name-row-body">
+          <p class="name-p"><b>Плюсы.</b> Классное английское слово, красивое звучание и поэтический смысл — хорошо попадает в платформу.</p>
+          <p class="name-p"><b>Риск.</b> Может сложно читаться для русского глаза.</p>
+          <p class="name-p name-link-line"><b>Пересечения.</b> <a href="https://unseenprod.com/" target="_blank" rel="noopener">unseenprod.com</a> — продакшн-компания; не организатор мероприятий, делает «креатив и моушн-дизайн для рекламы и мероприятий».</p>
+        </div>
       </div>
 
-      <div class="name-card">
-        <div class="name-word">ELSE</div>
-        <p class="name-d"><b>Плюсы.</b> Все преимущества UNSEEN — плюс заметно более знакомое и легче читается русскоязычной аудиторией.</p>
-        <p class="name-x"><b>Пересечения.</b> <a href="https://elseproduction.ru/" target="_blank" rel="noopener">elseproduction.ru</a> — агентство; <a href="https://elseagency.ru/" target="_blank" rel="noopener">elseagency.ru</a> — смежная индустрия (исследования и маркетинговый консалтинг).</p>
+      <div class="name-row">
+        <div class="name-row-head">
+          <div class="name-row-tag">Направление 01 · Классное звучание</div>
+          <div class="name-word-big">ELSE</div>
+        </div>
+        <div class="name-row-body">
+          <p class="name-p"><b>Плюсы.</b> Все преимущества UNSEEN — плюс заметно более знакомое и легче читается русскоязычной аудиторией.</p>
+          <p class="name-p name-link-line"><b>Пересечения.</b> <a href="https://elseproduction.ru/" target="_blank" rel="noopener">elseproduction.ru</a> — агентство; <a href="https://elseagency.ru/" target="_blank" rel="noopener">elseagency.ru</a> — смежная индустрия (исследования и маркетинговый консалтинг).</p>
+        </div>
       </div>
 
-      <div class="name-card">
-        <div class="name-word">GOSH</div>
-        <p class="name-d"><b>Плюсы.</b> Восклицание и эмоция, отлично попадает в платформу, описывает результат.</p>
-        <p class="name-d"><b>Риск.</b> Может быть незнакомо части нынешних клиентов.</p>
-        <p class="name-x"><b>Пересечения.</b> Крупных, известных на всю страну event-агентств с названием «Gosh Event» в России не найдено.</p>
+      <div class="name-row">
+        <div class="name-row-head">
+          <div class="name-row-tag">Направление 02 · Слово-эмоция</div>
+          <div class="name-word-big">GOSH</div>
+        </div>
+        <div class="name-row-body">
+          <p class="name-p"><b>Плюсы.</b> Восклицание и эмоция, отлично попадает в платформу, описывает результат.</p>
+          <p class="name-p"><b>Риск.</b> Может быть незнакомо части нынешних клиентов.</p>
+          <p class="name-p name-link-line"><b>Пересечения.</b> Крупных, известных на всю страну event-агентств с названием «Gosh Event» в России не найдено.</p>
+        </div>
       </div>
 
-      <div class="name-card">
-        <div class="name-word">OGO</div>
-        <p class="name-d"><b>Плюсы.</b> Все плюсы GOSH, но ещё более чистая эмоция — отлично работает на метафору и придаёт бренду более эмоциональный окрас, уводя от «супер-экспертности».</p>
-        <p class="name-x"><b>Пересечения.</b> <a href="https://twiga.ru/oggi" target="_blank" rel="noopener">twiga.ru/oggi</a> — созвучное агентство; <a href="https://ohmygodevent.com/" target="_blank" rel="noopener">ohmygodevent.com</a> — похожее по смыслу агентство, прямой конкурент.</p>
+      <div class="name-row featured">
+        <div class="name-row-head">
+          <span class="name-tag">Нравится больше всех</span>
+          <div class="name-row-tag">Направление 02 · Слово-эмоция</div>
+          <div class="name-word-big">OGO</div>
+        </div>
+        <div class="name-row-body">
+          <p class="name-p"><b>Плюсы.</b> Все плюсы GOSH, но ещё более чистая эмоция — отлично работает на метафору и придаёт бренду более эмоциональный окрас, уводя от «супер-экспертности».</p>
+          <p class="name-p name-link-line"><b>Пересечения.</b> <a href="https://twiga.ru/oggi" target="_blank" rel="noopener">twiga.ru/oggi</a> — созвучное агентство; <a href="https://ohmygodevent.com/" target="_blank" rel="noopener">ohmygodevent.com</a> — похожее по смыслу агентство, прямой конкурент.</p>
+        </div>
       </div>
 
-      <div class="name-card featured">
-        <span class="name-tag">Нравится больше всех</span>
-        <div class="name-word">STUN</div>
-        <p class="name-d"><b>Идея.</b> Зеркальная анаграмма — оба слова читаются как разговорные восклицания и описывают что-то очень крутое.</p>
-        <p class="name-d"><b>Риск.</b> Оба слова разговорные — если человек не слушает регулярно разговорный английский, игра слов может быть неочевидна.</p>
-        <p class="name-d"><b>Почему нравится.</b> Выражает неочевидные решения, которые не лежат на поверхности, эстетичность и умение играть со смыслами — а если отсылка не считывается, это просто крутое слово, которое хорошо читается и запоминается.</p>
-        <p class="name-x"><b>Пересечения.</b> Прямого пересечения не найдено; есть созвучия (SUN и близкие по звучанию слова).</p>
+      <div class="name-row featured">
+        <div class="name-row-head">
+          <span class="name-tag">Нравится больше всех</span>
+          <div class="name-row-tag">Направление 03 · Неожиданный приём</div>
+          <div class="name-word-big">STUN</div>
+        </div>
+        <div class="name-row-body">
+          <p class="name-p"><b>Идея.</b> Зеркальная анаграмма — оба слова читаются как разговорные восклицания и описывают что-то очень крутое.</p>
+          <p class="name-p"><b>Риск.</b> Оба слова разговорные — если человек не слушает регулярно разговорный английский, игра слов может быть неочевидна.</p>
+          <p class="name-p"><b>Почему нравится.</b> Выражает неочевидные решения, которые не лежат на поверхности, эстетичность и умение играть со смыслами — а если отсылка не считывается, это просто крутое слово, которое хорошо читается и запоминается.</p>
+          <p class="name-p name-link-line"><b>Пересечения.</b> Прямого пересечения не найдено; есть созвучия (SUN и близкие по звучанию слова).</p>
+        </div>
       </div>
     </div>
   </div>
